@@ -1,0 +1,3 @@
+[submodule "Gang-of-Four"]
+	path = Gang-of-Four
+	url = https://github.com/ganesh-k13/Gang-of-Four.git
