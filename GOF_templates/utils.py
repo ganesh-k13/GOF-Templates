@@ -7,8 +7,8 @@ def dummy_input(pattern = None):
 								 {'name': 'S2'},
 								 {'name': 'S3'}
 								],
-						'functions':[{'name': 'f1', 'param_types':['int', 'float'], 'params_names':['i1', 'f1'], 'return': 'void'},
-									 {'name': 'f2', 'params_types':['int', 'double'], 'params_names':['i2', 'd2'], 'return': 'double'}]
+						'functions':[{'name': 'f1', 'param_types':['int', 'float'], 'param_names':['i1', 'f1'], 'return': 'void'},
+									 {'name': 'f2', 'param_types':['int', 'double'], 'param_names':['i2', 'd2'], 'return': 'double'}]
 					   }
 					 )
 

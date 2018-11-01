@@ -5,9 +5,9 @@
 class State {
 	public:
 	
-		virtual void f1(int i1=0, float f1=0.0) = 0; // algointerface
+		virtual void f1(int i1, float f1) = 0; // algointerface
 	
-		virtual double f2(std::string s1="", float f1=0.0, int i1=1) = 0; // algointerface
+		virtual double f2(int i2, double d2) = 0; // algointerface
 	
 };
 
@@ -15,27 +15,27 @@ class State {
 class S1: public State {
 	public:
 	
-		virtual void f1(int i1=0, float f1=0.0); // algointerface
+		virtual void f1(int i1, float f1); // algointerface
 	
-		virtual double f2(std::string s1="", float f1=0.0, int i1=1); // algointerface
+		virtual double f2(int i2, double d2); // algointerface
 	
 };
 
 class S2: public State {
 	public:
 	
-		virtual void f1(int i1=0, float f1=0.0); // algointerface
+		virtual void f1(int i1, float f1); // algointerface
 	
-		virtual double f2(std::string s1="", float f1=0.0, int i1=1); // algointerface
+		virtual double f2(int i2, double d2); // algointerface
 	
 };
 
 class S3: public State {
 	public:
 	
-		virtual void f1(int i1=0, float f1=0.0); // algointerface
+		virtual void f1(int i1, float f1); // algointerface
 	
-		virtual double f2(std::string s1="", float f1=0.0, int i1=1); // algointerface
+		virtual double f2(int i2, double d2); // algointerface
 	
 };
 

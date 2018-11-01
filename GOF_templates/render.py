@@ -13,6 +13,8 @@ class State(Pattern):
 	
 	def __init__(self, meta):
 		Pattern.__init__(self, meta)
+		for fn in self.meta['functions']:
+			fn['params'] = list(zip(fn['param_types'], fn['param_names']))
 	
 	def render(self):
 		# Create output
