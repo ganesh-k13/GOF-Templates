@@ -1,40 +1,34 @@
 #include "../include/state.h"
 
 
-class S1: public State {
-	public:
 	
-		virtual void f1(int, float) {
+		void S1::f1(int i1=0, float f1=0.0) {
 		
 		}
 	
-		virtual double f2(string, float, int) {
-		
-		}
-	
-};
-
-class S2: public State {
-	public:
-	
-		virtual void f1(int, float) {
-		
-		}
-	
-		virtual double f2(string, float, int) {
+		double S1::f2(std::string s1="", float f1=0.0, int i1=1) {
 		
 		}
 	
 };
 
-class S3: public State {
-	public:
 	
-		virtual void f1(int, float) {
+		void S2::f1(int i1=0, float f1=0.0) {
 		
 		}
 	
-		virtual double f2(string, float, int) {
+		double S2::f2(std::string s1="", float f1=0.0, int i1=1) {
+		
+		}
+	
+};
+
+	
+		void S3::f1(int i1=0, float f1=0.0) {
+		
+		}
+	
+		double S3::f2(std::string s1="", float f1=0.0, int i1=1) {
 		
 		}
 	

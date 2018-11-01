@@ -1,4 +1,4 @@
-#include "../include/mobile.h"
+#include "../include/context.h"
 
 {% for fn in functions %}
 	{{fn.return}} Context::{{fn.name}}({{fn.params}}) {
@@ -9,6 +9,6 @@
 Context::Context() {
 }
 
-Mobile::~Mobile() {
+Context::~Context() {
 
 }

@@ -2,8 +2,8 @@
 #include <iostream>
 #include "state.h"
 
-#ifndef MOBILE_H
-#define MOBILE_H
+#ifndef CONTEXT_H
+#define CONTEXT_H
 
 // class State;
 

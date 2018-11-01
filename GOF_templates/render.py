@@ -10,6 +10,10 @@ class Pattern:
 		raise NotImplementedError("Subclass must implement abstract method")
 	
 class State(Pattern):
+	
+	def __init__(self, meta):
+		Pattern.__init__(self, meta)
+	
 	def render(self):
 		# Create output
 		try: 
