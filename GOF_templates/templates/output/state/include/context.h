@@ -2,8 +2,8 @@
 #include <iostream>
 #include "state.h"
 
-#ifndef MOBILE_H
-#define MOBILE_H
+#ifndef CONTEXT_H
+#define CONTEXT_H
 
 // class State;
 
@@ -13,9 +13,9 @@ class Context {
 		
 	public:
 		
-			void f1(int, float);
+			void f1(int i1, float f1);
 		
-			double f2(string, float, int);
+			double f2(int i2, double d2);
 		
 		void change_state(State *ptr_state) {
 			_ptr_state = ptr_state;

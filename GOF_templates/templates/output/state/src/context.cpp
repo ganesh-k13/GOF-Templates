@@ -1,18 +1,18 @@
-#include "../include/mobile.h"
+#include "../include/context.h"
 
 
-	void Context::f1(int, float) {
-		_ptr_state->f1(int, float);
+	void Context::f1(int i1,  float f1) {
+		_ptr_state->f1( i1, f1);
 	}
 
-	double Context::f2(string, float, int) {
-		_ptr_state->f2(string, float, int);
+	double Context::f2(int i2,  double d2) {
+		_ptr_state->f2( i2, d2);
 	}
 
 
 Context::Context() {
 }
 
-Mobile::~Mobile() {
+Context::~Context() {
 
 }
