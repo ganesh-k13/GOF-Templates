@@ -24,38 +24,14 @@ $(document).ready(function() {
     var allPatternEles = $(".patternDivCol");
     var allPatternEleNames = [];
     
-    // var opJson = {
-    //     'pattern': 'state',
-    //     'states':[ {
-    //         'name': 'S1'
-    //     }
-    //     ,
-    //     {
-    //         'name': 'S2'
-    //     }
-    //     ,
-    //     {
-    //         'name': 'S3'
-    //     }
-    //     ],
-    //     'functions':[ {
-    //         'name': 'f1', 'param_types': ['int', 'float'], 'param_names': ['i1', 'f1'], 'return': 'void'
-    //     }
-    //     ,
-    //     {
-    //         'name': 'f2', 'param_types': ['int', 'double'], 'param_names': ['i2', 'd2'], 'return': 'double'
-    //     }
-    //     ]
-    // }
-
     $(".patternDivCol").each(function(index, el) {
         allPatternEleNames.push($(this).attr("name"));
     }); 
 
 
-    console.log(allPatternEleNames);
+    // console.log(allPatternEleNames);
 
-    console.log(allPatternEles);
+    // console.log(allPatternEles);
     $("#patternSearchBox").on('input', function(event) {
         $(".patternDivCol").each(function(index, el) {
             $(this).css('display', 'none');;
@@ -73,5 +49,45 @@ $(document).ready(function() {
                 });
             });
         }
+    });
+
+    //remove repeatableElement functinality
+    $(".removeBtn").each(function(index, el) {
+        $(this).on('click', function(event) {
+            // console.log("Remove");
+            console.log($(this).parentsUntil($("#mainContainer"),".repeatableElement"));
+        });
+    });
+    //add repeatableElement functinality
+    var i=2;
+    $(".addBtn").each(function(index, el) {
+        $(this).on('click', function(event) {
+            $("#mainContainer").append("\
+                    <div class='row repeatableElement' id='row"+i+"'>\
+                        <div class='col-xl-1 col-lg-1 col-md-1 col-1'>\
+                            <input class='form form-control' type='text' name='retType'>\
+                        </div>\
+                        <div class='col-xl-1 col-lg-1 col-md-1 col-1'>\
+                            <input class='form form-control' type='text' name='funcName'>\
+                        </div>\
+                        <div class='col-xl-3 col-lg-3 col-md-3 col-3'>\
+                            <input class='form form-control' type='text' name='paramTypeList'>\
+                        </div>\
+                        <div class='col-xl-3 col-lg-3 col-md-3 col-3'>\
+                            <input class='form form-control' type='text' name='paramNameList'>\
+                        </div>\
+                        <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
+                            <button class='btn btn-danger removeBtn' >Remove</button>\
+                        </div>\
+                    </div>"); 
+            i++;
+            //remove repeatableElement functinality
+            $(".removeBtn").each(function(index, el) {
+                $(this).on('click', function(event) {
+                    // console.log("Remove");
+                    $(this).parentsUntil($("#mainContainer"),".repeatableElement").remove();
+                });
+            });
+        });
     });
 });

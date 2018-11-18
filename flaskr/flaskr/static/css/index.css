@@ -166,6 +166,16 @@ footer a:focus {
     vertical-align: middle;
 }
 
+#patternHeading{
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+.headings{
+    font-size: 24px;
+    font-weight: bold;
+}
+
 /*
     End - Writing your custom CSS here, or make your own CSS file.
 */
