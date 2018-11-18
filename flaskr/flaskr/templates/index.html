@@ -1,160 +1,104 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% block customCSS %}
+{% endblock %}
 
-        <title>GOF-Templates</title>
-
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
-
-        <!-- Font Awesome CSS -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href={{url_for('static', filename='css/index.css')}}>
-        {% block customCSS %}
-        {% endblock %}
-
-    </head>
-
-    <body>
-
-        <div class="wrapper">
-            <!-- Page Content  -->
-            <div id="content">
-                <nav class="navbar navbar-expand-md justify-content-between" id="topNav">
-                    <div class="container-fluid">
-                        <button class="btn btn-dark navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-nav">
-                                <i class="fas fa-align-justify"></i>
-                            <!-- <span class="navbar-toggler-icon"></span> -->
-                        </button>
-                        <div class="navbar-collapse collapse dual-nav w-50 order-1 order-md-0" id="navbarCollapseBtn">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active" id="sidebarCollapse">
-                                    <a class="nav-link pl-0" href="#" id="navbarCollapseBtnLink">
-                                        <!-- <i class="fas fa-align-justify"></i> -->
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <a href="#" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">
-                            GOF Templates
-                        </a>
-                        
-                        <div class="navbar-collapse collapse dual-nav w-50 order-2">
-                        </div>
-                    </div>
-                </nav>
-                <!-- START EDITING FROM HERE -->
-                <div id="customContent">
-                    {% block customContent %}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="patternSearchBoxDiv">
-                                <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Enter a Pattern Name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-fluid" id="patternContainer">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="statePatternDiv" name="state">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    State Pattern
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="adapterPatternDiv" name="adapter">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Adapter Pattern
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="decoratorPatternDiv" name="decorator">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Decorator Pattern
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="iteratorPatternDiv" name="iterator">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Iterator Pattern
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="mediatorPatternDiv" name="mediator">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Mediator Pattern
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="singletonPatternDiv" name="singleton">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Singleton Pattern
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" id="strategyPatternDiv" name="strategy">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                                    Strategy Pattern
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endblock %}
-                </div>
-
-                <!-- END EDITING HERE -->
-                <footer class="footer">
-                      <div class="container-fluid" id="footerDiv">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-2 col-xs-2">
-                                <i class="far fa-copyright"></i> Copyright GOF Template 2019.
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-5 col-sm-6 col-xs-5">
-                                <!-- <a href="#">About Us</a> -->
-                                <!-- <a href="#">Contact Us</a> -->
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-5">
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-facebook"></i></a>
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-reddit"></i></a>
-                            </div>
-                        </div>
-                      </div>
-                </footer>
-
+{% block customContent %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="patternSearchBoxDiv">
+                <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Enter a Pattern Name">
             </div>
         </div>
-
-        <div class="overlay"></div>
-
-        <!-- jQuery CDN-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <!-- tether 1.4.0 (for using bootstrap's tooltip component) -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"></script>
-
-        <!-- Popper.JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-        <!-- Our Suffix Tree JS -->
-        <script src={{url_for("static",filename="js/suffixTree.js")}}></script>
-
-        <!-- Our Custom JS -->
-        <script src={{url_for("static",filename="js/index.js")}}></script>
+    </div>
+    
+    <div class="container-fluid" id="patternContainer">
         
-        {% block customJS %}
-        {% endblock %}
+        <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="state">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("state") }}>
+                        <div id="statePatternDiv">
+                                State Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="adapter">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("adapter") }}>
+                        <div id="adapterPatternDiv">
+                                Adapter Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="decorator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("decorator") }}>
+                        <div id="decoratorPatternDiv">
+                                Decorator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="iterator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("iterator") }}>
+                        <div id="iteratorPatternDiv">
+                                Iterator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="mediator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("mediator") }}>
+                        <div id="mediatorPatternDiv">
+                                Mediator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="singleton">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("singleton") }}>
+                        <div id="singletonPatternDiv">
+                                Singleton Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="strategy">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("strategy") }}>
+                        <div id="strategyPatternDiv">
+                                Strategy Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+    
+    </div>
+{% endblock %}
 
-    </body>
+{% block customJS %}
+{% endblock %}
 
-</html>

@@ -160,6 +160,12 @@ footer a:focus {
     cursor: pointer;
 }
 
+.patternDivInfo a:-webkit-any-link{
+    text-decoration:none !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
 /*
     End - Writing your custom CSS here, or make your own CSS file.
 */
