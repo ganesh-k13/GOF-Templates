@@ -10,4 +10,4 @@ app.secret_key = 'secretkeyhereplease'
 
 @app.route("/")
 def home():
-	return "Moshi Moshi"
+	return render_template("index.html")
