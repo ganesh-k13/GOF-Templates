@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block customCSS %}
+{% endblock %}
+
+{% block customContent %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="patternSearchBoxDiv">
+                <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Enter a Pattern Name">
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid" id="patternContainer">
+        
+        <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="state">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("state") }}>
+                        <div id="statePatternDiv">
+                                State Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="adapter">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("adapter") }}>
+                        <div id="adapterPatternDiv">
+                                Adapter Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="decorator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("decorator") }}>
+                        <div id="decoratorPatternDiv">
+                                Decorator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="iterator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("iterator") }}>
+                        <div id="iteratorPatternDiv">
+                                Iterator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="mediator">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("mediator") }}>
+                        <div id="mediatorPatternDiv">
+                                Mediator Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="singleton">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("singleton") }}>
+                        <div id="singletonPatternDiv">
+                                Singleton Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="strategy">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("strategy") }}>
+                        <div id="strategyPatternDiv">
+                                Strategy Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+    
+    </div>
+{% endblock %}
+
+{% block customJS %}
+{% endblock %}
+
