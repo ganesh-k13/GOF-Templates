@@ -138,3 +138,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# custom
+.vscode
+venv/
+.venv
