@@ -1,17 +1,20 @@
 from flaskr import app
 
-from flask import Flask,render_template,redirect,url_for,flash, redirect, request, session, abort, jsonify, Response
+from flask import Flask,render_template,redirect,url_for,flash, redirect, request, session, abort, jsonify, Response, send_from_directory
 from werkzeug import secure_filename
-from flask import send_from_directory
 import os
 import datetime
+import json
+import sys
+
+sys.path.insert(0, '../../')
+from GOF_templates import render
 
 app.secret_key = 'secretkeyhereplease'
 
 @app.route("/")
 def home():
 	return render_template("index.html",title="GOF-Templates")
-
 
 @app.route("/state")
 def state():
@@ -41,34 +44,32 @@ def mediator():
 def iterator():
 	return render_template("patterns/iterator.html", title="Iterator")
 
-@app.route("/codeDownload",methods=["POST"])
+@app.route("/codeDownload", methods=["POST"])
 def codeDownload():
-	
-	statesList = request.form.getlist("statesList")
+	statesList = request.form.getlist("statesList")[0].split(',')
 	retType = request.form.getlist("retType")
 	funcName = request.form.getlist("funcName")
 	paramTypeList = request.form.getlist("paramTypeList")
 	paramNameList = request.form.getlist("paramNameList")
 
-	print(statesList)
-	print(retType)
-	print(funcName)
-	print(paramTypeList)
-	print(paramNameList)
+	# create json to be passed to State class
+	inpData = {}
+	inpData['pattern'] = 'state'
+	inpData['states'] = []
+	for state in statesList:
+		inpData['states'].append({'name': state})
+	
+	inpData['functions'] = []
 
-	# Below is a temporary representation, it's not final.
-	inpData = {
-		"statesList" : statesList,
-		"retType" : retType,
-		"funcName" : funcName,
-		"paramTypeList" : paramTypeList,
-		"paramNameList" : paramNameList
-	}
-
-	# -------------------------------------
-	# write the program to send json
-	# module.generateCode(jsonify(inpData))
-	# -------------------------------------
-
-
+	for i in range(len(funcName)):
+		function = {}
+		function['name'] = funcName[i]
+		function['param_types'] = paramTypeList[i].split(',')
+		function['param_names'] = paramNameList[i].split(',')
+		function['return'] = retType[i]
+		inpData['functions'].append(function)
+	
+	s = render.State(json.loads(json.dumps(inpData)))
+	s.render()
+	flash("Files for State Pattern are created!")
 	return redirect(url_for("home"))
