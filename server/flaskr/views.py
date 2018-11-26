@@ -1,4 +1,4 @@
-from flaskr import app
+from server.flaskr import app
 
 from flask import Flask,render_template,redirect,url_for,flash, redirect, request, session, abort, jsonify, Response, send_from_directory
 from werkzeug import secure_filename
@@ -69,7 +69,7 @@ def codeDownload():
 		function['return'] = retType[i]
 		inpData['functions'].append(function)
 	
-	# s = render.State(json.loads(json.dumps(inpData)))
-	# s.render()
-	# flash("Files for State Pattern are created!")
+	s = render.State(json.loads(json.dumps(inpData)))
+	s.render()
+	flash("Files for State Pattern are created!")
 	return redirect(url_for("home"))

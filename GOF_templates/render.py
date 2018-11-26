@@ -32,42 +32,42 @@ class State(Pattern):
 			pass
 		
 		# State.h
-		with open(dirname + '/templates/state/include/state.h', 'r') as f:
+		with open(dirname + '/templates/State/include/state.h', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/include/state.h', 'w') as f:
 			f.write(template.render(functions=self.meta['functions'], states=self.meta['states']))
 		
 		# State.cpp
-		with open(dirname + '/templates/state/src/state.cpp', 'r') as f:
+		with open(dirname + '/templates/State/src/state.cpp', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/src/state.cpp', 'w') as f:
 			f.write(template.render(functions=self.meta['functions'], states=self.meta['states']))
 		
 		# Context.h
-		with open(dirname + '/templates/state/include/context.h', 'r') as f:
+		with open(dirname + '/templates/State/include/context.h', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/include/context.h', 'w') as f:
 			f.write(template.render(functions=self.meta['functions']))
 		
 		# Context.cpp
-		with open(dirname + '/templates/state/src/context.cpp', 'r') as f:
+		with open(dirname + '/templates/State/src/context.cpp', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/src/context.cpp', 'w') as f:
 			f.write(template.render(functions=self.meta['functions']))
 		
 		# makefile
-		with open(dirname + '/templates/state/makefile', 'r') as f:
+		with open(dirname + '/templates/State/makefile', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/makefile', 'w') as f:
 			f.write(template.render())
 		
 		#test.cpp
-		with open(dirname + '/templates/state/test.cpp', 'r') as f:
+		with open(dirname + '/templates/State/test.cpp', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/state/test.cpp', 'w') as f:
