@@ -7,7 +7,7 @@ import datetime
 import json
 import sys
 
-sys.path.insert(0, '../../')
+# sys.path.insert(0, '../../')
 from GOF_templates import render
 
 app.secret_key = 'secretkeyhereplease'
@@ -69,7 +69,7 @@ def codeDownload():
 		function['return'] = retType[i]
 		inpData['functions'].append(function)
 	
-	s = render.State(json.loads(json.dumps(inpData)))
-	s.render()
-	flash("Files for State Pattern are created!")
+	# s = render.State(json.loads(json.dumps(inpData)))
+	# s.render()
+	# flash("Files for State Pattern are created!")
 	return redirect(url_for("home"))
