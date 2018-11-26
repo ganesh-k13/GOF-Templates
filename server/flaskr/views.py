@@ -1,4 +1,4 @@
-from flaskr import app
+from server.flaskr import app
 
 from flask import Flask,render_template,redirect,url_for,flash, redirect, request, session, abort, jsonify, Response, send_from_directory
 from werkzeug import secure_filename
@@ -7,7 +7,7 @@ import datetime
 import json
 import sys
 
-sys.path.insert(0, '../../')
+# sys.path.insert(0, '../../')
 from GOF_templates import render
 
 app.secret_key = 'secretkeyhereplease'
