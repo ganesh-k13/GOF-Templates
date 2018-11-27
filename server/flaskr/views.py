@@ -55,7 +55,12 @@ def codeCreate():
         paramTypeList = request.form.getlist("paramTypeList")
         paramNameList = request.form.getlist("paramNameList")
         fileType = request.form.get("fileType")
-
+        print("statesList:",statesList)
+        print("retType:",retType)
+        print("funcName:",funcName)
+        print("paramTypeList:",paramTypeList)
+        print("paramNameList:",paramNameList)
+        print("fileType:",fileType)
         # create json to be passed to State class
         inpData = {}
         inpData['pattern'] = 'state'
@@ -82,8 +87,8 @@ def codeCreate():
                                 patternType="state", 
                                 fileType=fileType))
     except Exception as e:
+        print("Exception:",e)
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
-
 
 @app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>")
 def codeDownload(filename,patternType,fileType):
@@ -97,4 +102,5 @@ def codeDownload(filename,patternType,fileType):
         print("Path:",os.path.join(app.config["USER_DOWNLOAD_FOLDER"],filename))
         return send_from_directory(app.config["USER_DOWNLOAD_FOLDER"],filename,as_attachment=True)
     else:
+        print("codeDownload wrror")
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
