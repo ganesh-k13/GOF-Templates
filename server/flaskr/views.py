@@ -85,7 +85,7 @@ def codeCreate():
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
 
 
-@app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["POST"])
+@app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>")
 def codeDownload(filename,patternType,fileType):
     if(fileType in app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
         utils.checkAndCreateDownloadsFolder()
