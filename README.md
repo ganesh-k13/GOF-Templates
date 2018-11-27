@@ -16,6 +16,8 @@ sudo pip3 install -r requirements.txt
 
 ## Running
 
+1. Clone this repository.
+2. Run these instructions from the repository's root:
 ```bash
 virtualenv -p python3 venv
 source venv/bin/activate
@@ -24,6 +26,7 @@ export FLASK_APP=views.py
 export FLASK_DEBUG=1
 flask run
 ```
+3. Site should be live in `http://localhost:5000/`
 
 ## Built With
 
