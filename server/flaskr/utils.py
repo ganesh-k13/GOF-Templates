@@ -20,9 +20,10 @@ def makeCompressedfile(outputFilename, sourceDir, fileType):
     
     else:
         print("outputFilename:",outputFilename)
+        print("sourceDir:",sourceDir)
         with zipfile.ZipFile(outputFilename, 'w', zipfile.ZIP_DEFLATED) as ziph:
             for root, dirs, files in os.walk(sourceDir):
                 for file in files:
-                    ziph.write(os.path.join(root, file))
+                    ziph.write(os.path.join(root, file),os.path.relpath(os.path.join(root, file), os.path.join(sourceDir, '..')))
 
 
