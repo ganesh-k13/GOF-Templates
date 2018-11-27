@@ -83,7 +83,15 @@ def codeCreate():
 
 @app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["GET","POST"])
 def codeDownload(filename,patternType,fileType):
-    
+    # START: Check if a downloads folder exists
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    try: 
+        os.makedirs(os.path.join(dirname,'downloads'))
+        print("\n\n\nDownloads folder Created!\n\n\n")
+    except(FileExistsError):
+        print("\n\n\nDownloads folder already exists!\n\n\n")
+        pass
+    # END: Check if a downloads folder exists 
     makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
                        sourceDir=os.path.join("./GOF_templates/templates/output/",patternType),
                        fileType=fileType)
