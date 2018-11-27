@@ -74,7 +74,6 @@ def codeCreate():
     flash("Files for State Pattern are created!")
     # TODO Redirect to downloads URL
     return redirect(url_for("codeDownload",filename="State.tar.gz"))
-    return redirect(url_for("home"))
 
 
 @app.route("/codeDownload/<path:filename>",methods=["GET","POST"])
