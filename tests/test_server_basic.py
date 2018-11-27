@@ -32,14 +32,14 @@ class TestApp:
             assert res.status_code == 200
         
     def test_invalid_code_create(self,client):
-
+        # improve this test
         mimetype = "application/x-www-form-urlencoded"
         headers = {
             "Content-Type": mimetype,
             "Accept": mimetype
         }
         data = {
-            "key1":"value1"
+            "key1":"value1",
         }
         url = "/codeCreate"
 
@@ -49,8 +49,7 @@ class TestApp:
 
     def test_valid_code_create(self,client):
         for fileType in list(app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
-            # mimetype = "application/x-www-form-urlencoded"
-            mimetype = "multipart/form-data"
+            mimetype = "application/x-www-form-urlencoded"
             headers = {
                 "Content-Type": mimetype
             }
@@ -66,4 +65,4 @@ class TestApp:
             url = "/codeCreate"
 
             response = client.post(url, data=data, headers=headers,follow_redirects=True)
-            # assert response.status_code == 200
+            assert response.status_code == 200
