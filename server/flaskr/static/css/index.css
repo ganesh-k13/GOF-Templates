@@ -176,6 +176,10 @@ footer a:focus {
     font-weight: bold;
 }
 
+.textCenter{
+    text-align: center;
+}
+
 /*
     End - Writing your custom CSS here, or make your own CSS file.
 */
