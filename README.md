@@ -7,12 +7,7 @@ Provides pattern templates based on user requirements
 ## Prerequisites
 
 * Python version 3.6 or higher
-* Flask version 0.12.2 or higher
-
-install prerequisites:
-```
-sudo pip3 install -r requirements.txt
-```
+* Flask version 1.0.2 or higher
 
 ## Running
 
@@ -21,9 +16,9 @@ sudo pip3 install -r requirements.txt
 ```bash
 virtualenv -p python3 venv
 source venv/bin/activate
-cd flaskr/flaskr
-export FLASK_APP=views.py
-export FLASK_DEBUG=1
+./venv/bin/pip3 -r requirements.txt
+export FLASK_APP=run.py
+export FLASK_ENV=development
 flask run
 ```
 3. Site should be live in `http://localhost:5000/`
