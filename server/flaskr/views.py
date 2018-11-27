@@ -6,6 +6,8 @@ import os
 import datetime
 import json
 import sys
+import tarfile
+import zipfile
 
 # sys.path.insert(0, '../../')
 from GOF_templates import render
@@ -51,6 +53,7 @@ def codeCreate():
     funcName = request.form.getlist("funcName")
     paramTypeList = request.form.getlist("paramTypeList")
     paramNameList = request.form.getlist("paramNameList")
+    fileType = request.form.get("fileType")
 
     # create json to be passed to State class
     inpData = {}
@@ -72,11 +75,33 @@ def codeCreate():
     s = render.State(json.loads(json.dumps(inpData)))
     s.render()
     flash("Files for State Pattern are created!")
-    # TODO Redirect to downloads URL
-    return redirect(url_for("codeDownload",filename="State.tar.gz"))
+
+    return redirect(url_for("codeDownload",
+                            filename="State"+fileType, 
+                            patternType="state", 
+                            fileType=fileType))
+
+@app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["GET","POST"])
+def codeDownload(filename,patternType,fileType):
+    
+    makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
+                       sourceDir=os.path.join("./GOF_templates/templates/output/",patternType),
+                       fileType=fileType)
+
+    print("Path:",os.path.join(app.config['USER_DOWNLOAD_FOLDER'],filename))
+    return send_from_directory(app.config['USER_DOWNLOAD_FOLDER'],filename,as_attachment=True)
+
+def makeCompressedfile(outputFilename, sourceDir, fileType):
+    if(fileType.startswith(".tar")):
+        extension = fileType.split(".")[2]
+        with tarfile.open(outputFilename, "w:"+extension) as tar:
+            tar.add(sourceDir, arcname=os.path.basename(sourceDir))
+    
+    else:
+        print("outputFilename:",outputFilename)
+        with zipfile.ZipFile(outputFilename, 'w', zipfile.ZIP_DEFLATED) as ziph:
+            for root, dirs, files in os.walk(sourceDir):
+                for file in files:
+                    ziph.write(os.path.join(root, file))
 
 
-@app.route("/codeDownload/<path:filename>",methods=["GET","POST"])
-def codeDownload(filename):
-    print("Path:",os.path.join(app.config['DOWNLOAD_FOLDER'],filename))
-    return send_from_directory(app.config['DOWNLOAD_FOLDER'],filename,as_attachment=True)

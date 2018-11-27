@@ -4,12 +4,14 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEBUG = False
-    DOWNLOAD_FOLDER = "./downloads/"
+    USER_DOWNLOAD_FOLDER = "./downloads/"
+    CODE_DOWNLOAD_FOLDER = "./server/flaskr/downloads/"
     
 class DevelopmentConfig(Config):
     DEBUG = True
     TEMPLATES_AUTO_RELOAD=True
-    DOWNLOAD_FOLDER = "./downloads/"
+    USER_DOWNLOAD_FOLDER = "./downloads/"
+    CODE_DOWNLOAD_FOLDER = "./server/flaskr/downloads/"
 
 class TestingConfig(Config):
     TESTING = True
