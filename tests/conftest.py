@@ -1,6 +1,6 @@
 import sys
 import pytest
-from flaskr import app as flaskApp
+from server.flaskr import app as flaskApp
 
 @pytest.fixture
 def app():

@@ -1,6 +1,6 @@
 import pytest
 import pytest_flask
-from flaskr import app
+from server.flaskr import app
 from flask import url_for
 
 class TestApp:
