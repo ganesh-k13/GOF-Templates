@@ -16,7 +16,7 @@ app.secret_key = 'secretkeyhereplease'
 
 @app.route("/")
 def home():
-    return render_template("index.html",title="GOF-Templates")
+    return render_template("index.html",title="GOF-Templates",isError=False, errorMessage=False)
 
 @app.route("/state")
 def state():
@@ -48,42 +48,44 @@ def iterator():
 
 @app.route("/codeCreate", methods=["POST"])
 def codeCreate():
-    statesList = request.form.getlist("statesList")[0].split(',')
-    retType = request.form.getlist("retType")
-    funcName = request.form.getlist("funcName")
-    paramTypeList = request.form.getlist("paramTypeList")
-    paramNameList = request.form.getlist("paramNameList")
-    fileType = request.form.get("fileType")
+    try:
+        statesList = request.form.getlist("statesList")[0].split(',')
+        retType = request.form.getlist("retType")
+        funcName = request.form.getlist("funcName")
+        paramTypeList = request.form.getlist("paramTypeList")
+        paramNameList = request.form.getlist("paramNameList")
+        fileType = request.form.get("fileType")
 
-    # create json to be passed to State class
-    inpData = {}
-    inpData['pattern'] = 'state'
-    inpData['states'] = []
-    for state in statesList:
-        inpData['states'].append({'name': state})
-    
-    inpData['functions'] = []
+        # create json to be passed to State class
+        inpData = {}
+        inpData['pattern'] = 'state'
+        inpData['states'] = []
+        for state in statesList:
+            inpData['states'].append({'name': state})
+        
+        inpData['functions'] = []
 
-    for i in range(len(funcName)):
-        function = {}
-        function['name'] = funcName[i]
-        function['param_types'] = paramTypeList[i].split(',')
-        function['param_names'] = paramNameList[i].split(',')
-        function['return'] = retType[i]
-        inpData['functions'].append(function)
-    
-    s = render.State(json.loads(json.dumps(inpData)))
-    s.render()
-    flash("Files for State Pattern are created!")
+        for i in range(len(funcName)):
+            function = {}
+            function['name'] = funcName[i]
+            function['param_types'] = paramTypeList[i].split(',')
+            function['param_names'] = paramNameList[i].split(',')
+            function['return'] = retType[i]
+            inpData['functions'].append(function)
+        
+        s = render.State(json.loads(json.dumps(inpData)))
+        s.render()
+        flash("Files for State Pattern are created!")
 
-    return redirect(url_for("codeDownload",
-                            filename="State"+fileType, 
-                            patternType="state", 
-                            fileType=fileType))
+        return redirect(url_for("codeDownload",
+                                filename="State"+fileType, 
+                                patternType="state", 
+                                fileType=fileType))
+    except Exception as e:
+        return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
 
-@app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["GET","POST"])
+@app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["POST"])
 def codeDownload(filename,patternType,fileType):
-    
     utils.checkAndCreateDownloadsFolder()
 
     utils.makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
@@ -92,4 +94,3 @@ def codeDownload(filename,patternType,fileType):
 
     print("Path:",os.path.join(app.config['USER_DOWNLOAD_FOLDER'],filename))
     return send_from_directory(app.config['USER_DOWNLOAD_FOLDER'],filename,as_attachment=True)
-
