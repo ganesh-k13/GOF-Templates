@@ -3,9 +3,16 @@ language: python
 python:
   - "3.6"
 
-os:
-  - linux
-  - osx   
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      python: 3.6
+      env: TOXENV=py36  
+  include:
+    - os: osx
+      language: generic
+      env: TOXENV=py36    
     
 sudo: required
 
