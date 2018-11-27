@@ -6,6 +6,7 @@ import os
 import datetime
 import json
 import sys
+import tarfile
 
 # sys.path.insert(0, '../../')
 from GOF_templates import render
@@ -78,5 +79,10 @@ def codeCreate():
 
 @app.route("/codeDownload/<path:filename>",methods=["GET","POST"])
 def codeDownload(filename):
-    print("Path:",os.path.join(app.config['DOWNLOAD_FOLDER'],filename))
-    return send_from_directory(app.config['DOWNLOAD_FOLDER'],filename,as_attachment=True)
+    makeTarfile(os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),"./GOF_templates/templates/output/state")
+    print("Path:",os.path.join(app.config['USER_DOWNLOAD_FOLDER'],filename))
+    return send_from_directory(app.config['USER_DOWNLOAD_FOLDER'],filename,as_attachment=True)
+
+def makeTarfile(outputFilename, sourceDir):
+    with tarfile.open(outputFilename, "w:gz") as tar:
+        tar.add(sourceDir, arcname=os.path.basename(sourceDir))
