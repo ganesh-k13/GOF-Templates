@@ -12,6 +12,7 @@ class DevelopmentConfig(Config):
     TEMPLATES_AUTO_RELOAD=True
     USER_DOWNLOAD_FOLDER = "./downloads/"
     CODE_DOWNLOAD_FOLDER = "./server/flaskr/downloads/"
+    ALLOWED_COMPRESSED_FILE_EXTENSIONS = set([".tar.gz",".tar.xz",".tar.bz2",".zip"])
 
 class TestingConfig(Config):
     TESTING = True
