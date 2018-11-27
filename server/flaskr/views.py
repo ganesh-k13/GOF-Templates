@@ -84,13 +84,17 @@ def codeCreate():
     except Exception as e:
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
 
+
 @app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>",methods=["POST"])
 def codeDownload(filename,patternType,fileType):
-    utils.checkAndCreateDownloadsFolder()
+    if(fileType in app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
+        utils.checkAndCreateDownloadsFolder()
 
-    utils.makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
-                       sourceDir=os.path.join("./GOF_templates/templates/output/",patternType),
-                       fileType=fileType)
+        utils.makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
+                           sourceDir=os.path.join("./GOF_templates/templates/output/",patternType),
+                           fileType=fileType)
 
-    print("Path:",os.path.join(app.config['USER_DOWNLOAD_FOLDER'],filename))
-    return send_from_directory(app.config['USER_DOWNLOAD_FOLDER'],filename,as_attachment=True)
+        print("Path:",os.path.join(app.config["USER_DOWNLOAD_FOLDER"],filename))
+        return send_from_directory(app.config["USER_DOWNLOAD_FOLDER"],filename,as_attachment=True)
+    else:
+        return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
