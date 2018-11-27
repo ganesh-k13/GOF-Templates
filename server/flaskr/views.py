@@ -73,6 +73,7 @@ def codeCreate():
     s.render()
     flash("Files for State Pattern are created!")
     # TODO Redirect to downloads URL
+    return redirect(url_for("codeDownload",filename="State.tar.gz"))
     return redirect(url_for("home"))
 
 
