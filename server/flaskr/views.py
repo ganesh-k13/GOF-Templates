@@ -47,7 +47,7 @@ def iterator():
     return render_template("patterns/iterator.html", title="Iterator")
 
 @app.route("/codeCreateForState", methods=["POST"])
-def codeCreate():
+def codeCreateForState():
     try:
         statesList = request.form.getlist("statesList")[0].split(',')
         retType = request.form.getlist("retType")
@@ -61,6 +61,7 @@ def codeCreate():
         print("paramTypeList:",paramTypeList)
         print("paramNameList:",paramNameList)
         print("fileType:",fileType)
+        
         # create json to be passed to State class
         inpData = {}
         inpData['pattern'] = 'state'
