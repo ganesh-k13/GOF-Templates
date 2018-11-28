@@ -22,9 +22,9 @@ def home():
 def state():
     return render_template("patterns/state.html", title="State", inpValueField1="States", inpValueField2="Functions")
 
-@app.route("/strategy")
+@app.route("/policy")
 def strategy():
-    return render_template("patterns/strategy.html", title="Strategy")
+    return render_template("patterns/policy.html", title="Policy")
 
 @app.route("/singleton")
 def singleton():
@@ -46,7 +46,7 @@ def mediator():
 def iterator():
     return render_template("patterns/iterator.html", title="Iterator")
 
-@app.route("/codeCreate", methods=["POST"])
+@app.route("/codeCreateForState", methods=["POST"])
 def codeCreate():
     try:
         statesList = request.form.getlist("statesList")[0].split(',')
@@ -85,6 +85,51 @@ def codeCreate():
         return redirect(url_for("codeDownload",
                                 filename="State"+fileType, 
                                 patternType="state", 
+                                fileType=fileType))
+    except Exception as e:
+        print("Exception:",e)
+        return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
+
+@app.route("/codeCreateForPolicy", methods=["POST"])
+def codeCreateForPolicy():
+    try:
+        policiesList = request.form.getlist("policiesList")[0].split(',')
+        retType = request.form.getlist("retType")
+        funcName = request.form.getlist("funcName")
+        paramTypeList = request.form.getlist("paramTypeList")
+        paramNameList = request.form.getlist("paramNameList")
+        fileType = request.form.get("fileType")
+        print("policiesList:",policiesList)
+        print("retType:",retType)
+        print("funcName:",funcName)
+        print("paramTypeList:",paramTypeList)
+        print("paramNameList:",paramNameList)
+        print("fileType:",fileType)
+
+        # create json to be passed to Policy class
+        inpData = {}
+        inpData['pattern'] = 'policy'
+        inpData['policies'] = []
+        for policy in policiesList:
+            inpData['policies'].append({'name': policy})
+        
+        inpData['functions'] = []
+
+        for i in range(len(funcName)):
+            function = {}
+            function['name'] = funcName[i]
+            function['param_types'] = paramTypeList[i].split(',')
+            function['param_names'] = paramNameList[i].split(',')
+            function['return'] = retType[i]
+            inpData['functions'].append(function)
+        
+        s = render.Policy(json.loads(json.dumps(inpData)))
+        s.render()
+        flash("Files for State Pattern are created!")
+
+        return redirect(url_for("codeDownload",
+                                filename="Policy"+fileType, 
+                                patternType="policy", 
                                 fileType=fileType))
     except Exception as e:
         print("Exception:",e)
