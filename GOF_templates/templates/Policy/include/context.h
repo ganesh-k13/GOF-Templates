@@ -12,13 +12,7 @@ class Context {
 	public:
 		// creates all the function interfaces to be implemented by each policy
 		{% for fn in functions %}
-			{{fn.return}} {{fn.name}}(
-				{% for type, name in fn['params'][:-1] %}
-					{{type}} {{name}}, 
-				{% endfor %}
-				{{fn['param_types'][-1]}} 
-				{{fn['param_names'][-1]}}
-			);
+			{{fn.return}} {{fn.name}}({% for type, name in fn['params'][:-1] %}{{type}} {{name}},{% endfor %}{{fn['param_types'][-1]}} {{fn['param_names'][-1]}});
 		{% endfor %}
 
 		// context class constructor

@@ -83,6 +83,7 @@ class Policy(Pattern):
 	def render(self):
 		# Create output
 		dirname = os.path.dirname(os.path.abspath(__file__))
+		print("\n\nDirname for Policy: {0}\n\n".format(dirname))
 		try: 
 			os.makedirs(dirname + '/templates/output')
 			os.makedirs(dirname + '/templates/output/policy')
@@ -90,33 +91,33 @@ class Policy(Pattern):
 			os.makedirs(dirname + '/templates/output/policy/obj')
 			os.makedirs(dirname + '/templates/output/policy/src')
 
-			print("\n\n\nNew Files Created!\n\n\n")
+			print("\n\nNew Files Created!\n\n")
 		except(FileExistsError):
-			print("\n\n\nNew Files NOT Created! Delete existing files first! \n\n\n")
+			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
 			pass
 		
-		# State.h
+		# policy.h
 		with open(dirname + '/templates/Policy/include/policy.h', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/policy/include/policy.h', 'w') as f:
-			f.write(template.render(functions=self.meta['functions'], states=self.meta['policies']))
+			f.write(template.render(functions=self.meta['functions'], policies=self.meta['policies']))
 		
-		# State.cpp
+		# policy.cpp
 		with open(dirname + '/templates/Policy/src/policy.cpp', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/policy/src/policy.cpp', 'w') as f:
-			f.write(template.render(functions=self.meta['functions'], states=self.meta['policies']))
+			f.write(template.render(functions=self.meta['functions'], policies=self.meta['policies']))
 		
-		# Context.h
+		# context.h
 		with open(dirname + '/templates/Policy/include/context.h', 'r') as f:
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/policy/include/context.h', 'w') as f:
 			f.write(template.render(functions=self.meta['functions']))
 		
-		# Context.cpp
+		# context.cpp
 		with open(dirname + '/templates/Policy/src/context.cpp', 'r') as f:
 			template = Template(f.read())
 		
@@ -135,4 +136,4 @@ class Policy(Pattern):
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/policy/test.cpp', 'w') as f:
-			f.write(template.render(functions=self.meta['functions'], states=self.meta['policies']))
+			f.write(template.render(functions=self.meta['functions'], policies=self.meta['policies']))

@@ -12,12 +12,7 @@ int main() {
 
 	{% for p in policies %}
 		{% for fn in functions %}
-			c_{{p.name}}.{{fn.name}}(
-				{% for type, name in fn['params'][:-1] %}
-					{{name}}, 
-				{% endfor %}
-				{{fn['param_names'][-1]}}
-			);
+			c_{{p.name}}.{{fn.name}}({% for type, name in fn['params'][:-1] %}{{name}}, {% endfor %}{{fn['param_names'][-1]}});
 		{% endfor %}
 	{% endfor %}
 }

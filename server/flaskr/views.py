@@ -23,8 +23,8 @@ def state():
     return render_template("patterns/state.html", title="State", inpValueField1="States", inpValueField2="Functions")
 
 @app.route("/policy")
-def strategy():
-    return render_template("patterns/policy.html", title="Policy")
+def policy():
+    return render_template("patterns/policy.html", title="Policy", inpValueField1="Policies", inpValueField2="Functions")
 
 @app.route("/singleton")
 def singleton():
@@ -123,9 +123,10 @@ def codeCreateForPolicy():
             function['return'] = retType[i]
             inpData['functions'].append(function)
         
+        print(inpData)
         s = render.Policy(json.loads(json.dumps(inpData)))
         s.render()
-        flash("Files for State Pattern are created!")
+        flash("Files for Policy Pattern are created!")
 
         return redirect(url_for("codeDownload",
                                 filename="Policy"+fileType, 
