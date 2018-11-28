@@ -21,7 +21,7 @@ sudo pip3 install -r requirements.txt
 ```bash
 virtualenv -p python3 venv
 source venv/bin/activate
-cd flaskr/flaskr
+cd server/flaskr
 export FLASK_APP=views.py
 export FLASK_DEBUG=1
 flask run
