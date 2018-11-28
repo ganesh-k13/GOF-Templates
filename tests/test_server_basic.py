@@ -32,9 +32,7 @@ class TestApp:
 				"paramNameList" : ["pn1,pn2,pn3,pn4","apn1,apn2,apn3,apn4"],
 				"fileType" : fileType
 			}
-
 			url = "/codeCreateForState"
-
 			response = client.post(url, data=data, headers=headers, follow_redirects=True)
 			assert response.status_code == 200
 	

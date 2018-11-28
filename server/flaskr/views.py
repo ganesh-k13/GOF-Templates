@@ -149,5 +149,5 @@ def codeDownload(filename,patternType,fileType):
         print("Path:",os.path.join(app.config["USER_DOWNLOAD_FOLDER"],filename))
         return send_from_directory(app.config["USER_DOWNLOAD_FOLDER"],filename,as_attachment=True)
     else:
-        print("codeDownload wrror")
+        print("codeDownload error")
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)

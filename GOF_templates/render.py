@@ -26,9 +26,9 @@ class State(Pattern):
 			os.makedirs(dirname + '/templates/output/state/obj')
 			os.makedirs(dirname + '/templates/output/state/src')
 
-			print("\n\n\nNew Files Created!\n\n\n")
+			print("\n\nNew Files Created!\n\n")
 		except(FileExistsError):
-			print("\n\n\nNew Files NOT Created! Delete existing files first! \n\n\n")
+			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
 			pass
 		
 		# State.h
@@ -85,7 +85,7 @@ class Policy(Pattern):
 		dirname = os.path.dirname(os.path.abspath(__file__))
 		print("\n\nDirname for Policy: {0}\n\n".format(dirname))
 		try: 
-			os.makedirs(dirname + '/templates/output')
+			# os.makedirs(dirname + '/templates/output')
 			os.makedirs(dirname + '/templates/output/policy')
 			os.makedirs(dirname + '/templates/output/policy/include')
 			os.makedirs(dirname + '/templates/output/policy/obj')
