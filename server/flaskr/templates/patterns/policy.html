@@ -4,37 +4,32 @@
 {% endblock %}
 
 {% block customContent %}
-<!-- {
-	'pattern': 'state',
-	
-	'states':[ {
-			'name': 'S1'
-		}
-		,{
-			'name': 'S2'
-		}
-		,{
-			'name': 'S3'
-		}
-	],
-	
-	'functions':[ {
+<!-- 
+{
+	'pattern': 'policy',	
+    'policies':[ 
+        {'name': 'P1'},
+        {'name': 'P2'},
+        {'name': 'P3'}
+    ],
+    'functions':[ 
+        {
 			'name': 'f1', 'param_types': ['int', 'float'], 'param_names': ['i1', 'f1'], 'return': 'void'
-		}
-		,{
+        },
+        {
 			'name': 'f2', 'param_types': ['int', 'double'], 'param_names': ['i2', 'd2'], 'return': 'double'
 		}
 	]
 }
- -->
+-->
 
 <div class="container">
 	<div class="row">
 		
-		<form method="POST" action={{ url_for("codeCreateForState") }}>
+		<form method="POST" action={{ url_for("codeCreateForPolicy") }}>
 			<div class="col-xl-12 col-lg-12 col-md-12 col-12 headings">
 				Enter {{ inpValueField1 }} as Comma-separated-values (CSV):
-				<input class="form form-control" type="text" name="statesList">
+				<input class="form form-control" type="text" name="policiesList">
 			</div>
 			
 			<div class="col-xl-12 col-lg-12 col-md-12 col-12" style="margin-top: 10px">

@@ -10,11 +10,15 @@ class TestApp:
 		res = client.get(url_for('home'))
 		assert res.status_code == 200
 
-	def test_code_create(self, client):
-		res = client.get(url_for('home'))
+	def test_state_page(self, client):
+		res = client.get(url_for('state'))
+		assert res.status_code == 200
+
+	def test_policy_page(self, client):
+		res = client.get(url_for('policy'))
 		assert res.status_code == 200
 	
-	def test_valid_code_create(self,client):
+	def test_valid_state_pattern_create(self, client):
 		for fileType in list(app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
 			mimetype = "application/x-www-form-urlencoded"
 			headers = {
@@ -28,12 +32,30 @@ class TestApp:
 				"paramNameList" : ["pn1,pn2,pn3,pn4","apn1,apn2,apn3,apn4"],
 				"fileType" : fileType
 			}
-
-			url = "/codeCreate"
-
-			response = client.post(url, data=data, headers=headers,follow_redirects=True)
+			url = "/codeCreateForState"
+			response = client.post(url, data=data, headers=headers, follow_redirects=True)
 			assert response.status_code == 200
 	
+	def test_valid_policy_pattern_create(self, client):
+		for fileType in list(app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
+			mimetype = "application/x-www-form-urlencoded"
+			headers = {
+				"Content-Type": mimetype
+			}
+			data = {
+				"policiesList" : ["a,b,c,d"],
+				"retType" : ["int","float"],
+				"funcName" : ["f1","f2"],
+				"paramTypeList" : ["pt1,pt2,pt3,pt4","apt1,apt2,apt3,apt4"],
+				"paramNameList" : ["pn1,pn2,pn3,pn4","apn1,apn2,apn3,apn4"],
+				"fileType" : fileType
+			}
+
+			url = "/codeCreateForPolicy"
+
+			response = client.post(url, data=data, headers=headers, follow_redirects=True)
+			assert response.status_code == 200
+
 	def test_invalid_code_download(self, client):
 		res = client.get(url_for('codeDownload',
 								filename="a.pdf",
@@ -51,7 +73,7 @@ class TestApp:
 							))
 			assert res.status_code == 200
 		
-	def test_invalid_code_create(self,client):
+	def test_invalid_state_pattern_create(self, client):
 		# improve this test
 		mimetype = "application/x-www-form-urlencoded"
 		headers = {
@@ -61,8 +83,20 @@ class TestApp:
 		data = {
 			"key1":"value1",
 		}
-		url = "/codeCreate"
-
+		url = "/codeCreateForState"
 		response = client.post(url, data=json.dumps(data), headers=headers)
-
+		assert response.status_code == 302
+	
+	def test_invalid_policy_pattern_create(self, client):
+		# improve this test
+		mimetype = "application/x-www-form-urlencoded"
+		headers = {
+			"Content-Type": mimetype,
+			"Accept": mimetype
+		}
+		data = {
+			"key1":"value1",
+		}
+		url = "/codeCreateForPolicy"
+		response = client.post(url, data=json.dumps(data), headers=headers)
 		assert response.status_code == 302

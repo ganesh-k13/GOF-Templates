@@ -21,6 +21,7 @@ source venv/bin/activate
 ./venv/bin/pip3 -r requirements.txt
 export FLASK_APP=run.py
 export FLASK_ENV=development
+
 flask run
 ```
 3. Site should be live in `http://localhost:5000/`
