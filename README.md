@@ -9,7 +9,14 @@ Provides pattern templates based on user requirements
 ## Prerequisites
 
 * Python version 3.6 or higher
-* Flask version 1.0.2 or higher
+* Flask version 0.12.2 or higher
+* Astyle version 3.1
+
+install prerequisites:
+```
+sudo pip3 install -r requirements.txt
+brew install astyle
+```
 
 ## Running
 
