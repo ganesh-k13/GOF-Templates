@@ -10,7 +10,7 @@ $(document).ready(function() {
     $("#patternSearchBox").on('blur', function(event) {
         $(this).css('border-bottom', '1px solid black');
     });
-
+    
     var patternArr = [
         "state",
         "adapter",
@@ -18,7 +18,7 @@ $(document).ready(function() {
         "iterator",
         "mediator",
         "singleton",
-        "strategy"
+        "policy"
     ];
     var trie = SuffixTree.fromArray(patternArr);
     var allPatternEles = $(".patternDivCol");
