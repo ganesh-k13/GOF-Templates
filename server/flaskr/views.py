@@ -140,6 +140,10 @@ def codeCreateForPolicy():
 @app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>")
 def codeDownload(filename,patternType,fileType):
     if(fileType in app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
+        beautify_cmd = "astyle --style=attach -s4 -xG -xe -YFpCHUSK --recursive ./GOF_templates/templates/output/" + patternType + "/*.cpp,*.h"
+        os.system(beautify_cmd)
+        os.system("find . -type f -name '*.orig' -exec rm {} +")
+        
         utils.checkAndCreateDownloadsFolder()
 
         utils.makeCompressedfile(outputFilename=os.path.join(app.config['CODE_DOWNLOAD_FOLDER'],filename),
