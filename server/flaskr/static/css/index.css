@@ -117,13 +117,18 @@ footer a:focus {
     font-size: 30px;
 }
 
+#patternSearchBoxWrapper
+{
+    border-bottom: 1px solid black;    
+}
+
 #patternSearchBox
 {
     font-size: 30px;
     border-left: none;
     border-right: none;
     border-top: none;
-    border-bottom: 1px solid black;
+    border-bottom: none;
     border-radius: 0px;
     box-shadow: none;
     -moz-box-shadow: none;
@@ -178,6 +183,26 @@ footer a:focus {
 
 .textCenter{
     text-align: center;
+}
+
+#searchClearBtn{
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000000;
+    border-radius: 0px;
+    background-color: inherit;
+}
+
+#searchClearBtn:hover{
+    color: #C40000;
+    border-radius: 0px;
+    background-color: inherit;
+}
+
+#searchClearBtn:focus {
+    outline:0;
 }
 
 /*
