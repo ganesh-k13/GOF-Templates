@@ -5,7 +5,7 @@ $(document).ready(function() {
         console.log("add clicked",$(this));
         $("#stateListColDiv").append("\
             <div class='input-group repeatableStateListGroup'>\
-                <input type='text' class='form-control stateName' placeholder='State Name' aria-label='State Name' aria-describedby='basic-addon2'>\
+                <input type='text' class='form-control validName' placeholder='State Name' aria-label='State Name' aria-describedby='basic-addon2'>\
                 <div class='input-group-append'>\
                     <button class='btn btn-outline-secondary addStateBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another state'>\
                         +\
@@ -34,8 +34,8 @@ $(document).ready(function() {
         var eleToBeAddedTo = $(this).parents(".paramDiv");
         eleToBeAddedTo.append("\
             <div class='input-group repeatableParamListGroup'>\
-                <input type='text' class='form-control' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
-                <input type='text' class='form-control' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
+                <input type='text' class='form-control validName' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
+                <input type='text' class='form-control validName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
                 <div class='input-group-append'>\
                     <button class='btn btn-outline-secondary addParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another parameter'>+</button>\
                     <button class='btn btn-outline-secondary delParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Delete this parameter'>-</button>\
@@ -62,15 +62,15 @@ $(document).ready(function() {
                 <div class='container-fluid repeatableFuncDeclList'>\
                     <div class='row'>\
                         <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
-                            <input type='text' class='form-control' placeholder='Return Type' aria-label='Return Type' aria-describedby='basic-addon3'>\
+                            <input type='text' class='form-control validName' placeholder='Return Type' aria-label='Return Type' aria-describedby='basic-addon3'>\
                         </div>\
                         <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
-                            <input type='text' class='form-control' placeholder='Function Name' aria-label='Function Name' aria-describedby='basic-addon4'>\
+                            <input type='text' class='form-control validName' placeholder='Function Name' aria-label='Function Name' aria-describedby='basic-addon4'>\
                         </div>\
                         <div class='col-xl-6 col-lg-6 col-md-6 col-6 paramDiv'>\
                             <div class='input-group repeatableParamListGroup'>\
-                                <input type='text' class='form-control' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
-                                <input type='text' class='form-control' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
+                                <input type='text' class='form-control validName' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
+                                <input type='text' class='form-control validName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
                                 <div class='input-group-append'>\
                                     <button class='btn btn-outline-secondary addParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another parameter'>+</button>\
                                     <button class='btn btn-outline-secondary delParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Delete this parameter' style='pointer-events: none;' disabled>-</button>\
@@ -108,7 +108,7 @@ $(document).ready(function() {
     // END: Cosmetic change to display file type selected in the dropdown.
 
     // START : Code Download Functionality (includes form submission without forms per se)
-    $("#codeDownload").on('submit', function(event) {
+    $("#codeDownload").on('click', function(event) {
         // 0. The JSON required by render.py is mentioned
         // 1. Get all variable values
         // 2. Organise them in the inputData JS Object
@@ -143,7 +143,7 @@ $(document).ready(function() {
 
         function getStatesList(){
             var statesList = [];
-            $(".stateName").each(function(index, el) {
+            $(".validName").each(function(index, el) {
                 statesList.push($(this).val());
             });
             return statesList;
@@ -152,5 +152,26 @@ $(document).ready(function() {
     });
 
     // END : Code Download Functionality (includes form submission without forms per se)
+    
+    // START : State name validation
+    function matchExact(r, str) {
+       var match = str.match(r);
+       return match != null && str == match[0];
+    }
+    $(".entireStateWrapper").on("input",".validName", function(event) {
+       var res = matchExact(/[A-Za-z_]+[A-Za-z0-9_]*/g,$(this).val()); //basically it's a valid variable in a language like C++
+       if(res==false){
+            console.log("here");
+            $(this).css('color', 'red');
+       }
+       else{
+            $(this).css('color', 'green');
+       }
+    });
+
+    $(".entireStateWrapper").on("blur",".validName", function(event) {
+        $(this).css('color', 'black');
+    });
+    // END : State name validation
 
 });
