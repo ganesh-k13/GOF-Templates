@@ -110,7 +110,7 @@ $(document).ready(function() {
     
     // START: Cosmetic change to display file type selected in the dropdown.
     $(".fileType").on('click', function(event) {
-        $("#placeholderChange").text($(this).text());
+        $("#fileTypeBtn").text($(this).text());
     });
     // END: Cosmetic change to display file type selected in the dropdown.
 
@@ -243,9 +243,10 @@ $(document).ready(function() {
         var inpData = {
             "pattern":"state",
             "states":getStatesList(),
-            "functions":getFunctionDeclList()
+            "functions":getFunctionDeclList(),
+            "fileType":$("#fileTypeBtn").text(), //this key will be removed in backend.
         }
-
+        console.log("inpData:",inpData)
         if(!errorCheckAttributes["isErraneousForm"]){
             // do AJAX POST and send it away, woo
             console.log(inpData);
@@ -257,14 +258,21 @@ $(document).ready(function() {
                 data: JSON.stringify(inpData),
                 contentType:"application/json; charset=UTF-8"
             })
-            .done(function() {
+            .done(function(info) {
                 console.log("success");
+                console.log("success info:",info);
+                if(info["success"]==1)
+                {
+                    $("#downloadCodeForm").submit(); //download the code. AJAX can't download by itself
+                }
             })
-            .fail(function() {
+            .fail(function(info) {
                 console.log("error");
+                console.log("error info:",info);
             })
             .always(function() {
                 console.log("complete");
+                console.log("complete info:",$(this));
             });
             
         }
