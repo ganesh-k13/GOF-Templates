@@ -46,8 +46,8 @@
 	border-left: 1px solid black;
 }
 
-#funcDeclDivRow{
-	max-height: 700px;
+#funcDeclDivRow,#stateListColDiv{
+	max-height: 300px;
 	overflow-y: auto;
 }
 .customBorder{
