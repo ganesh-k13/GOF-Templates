@@ -23,7 +23,7 @@
 	padding-right: 0px;
 }
 
-.repeatableGroup{
+.repeatableStateListGroup{
 	margin-top: 3px;
 }
 .stateName{
@@ -43,4 +43,12 @@
 
 #funcDeclWrapper{
 	border-left: 1px solid black;
+}
+
+.customBorder{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 5px;
+	padding-left: 5px; 
+	border: 1px solid #51514D;
 }
