@@ -5,7 +5,8 @@ $(document).ready(function() {
         console.log("add clicked",$(this));
         $("#stateListColDiv").append("\
             <div class='input-group repeatableStateListGroup'>\
-                <input type='text' class='form-control validName' placeholder='State Name' aria-label='State Name' aria-describedby='basic-addon2'>\
+                <input type='text' class='form-control validName stateName' placeholder='State Name' aria-label='State Name' aria-describedby='basic-addon2'\
+                 tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
                 <div class='input-group-append'>\
                     <button class='btn btn-outline-secondary addStateBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another state'>\
                         +\
@@ -34,8 +35,10 @@ $(document).ready(function() {
         var eleToBeAddedTo = $(this).parents(".paramDiv");
         eleToBeAddedTo.append("\
             <div class='input-group repeatableParamListGroup'>\
-                <input type='text' class='form-control validName' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
-                <input type='text' class='form-control validName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
+                <input type='text' class='form-control validName paramType' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
+                <input type='text' class='form-control validName paramName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
                 <div class='input-group-append'>\
                     <button class='btn btn-outline-secondary addParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another parameter'>+</button>\
                     <button class='btn btn-outline-secondary delParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Delete this parameter'>-</button>\
@@ -62,15 +65,19 @@ $(document).ready(function() {
                 <div class='container-fluid repeatableFuncDeclList'>\
                     <div class='row'>\
                         <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
-                            <input type='text' class='form-control validName' placeholder='Return Type' aria-label='Return Type' aria-describedby='basic-addon3'>\
+                            <input type='text' class='form-control validName retTypeName' placeholder='Return Type' aria-label='Return Type' aria-describedby='basic-addon3'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
                         </div>\
                         <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
-                            <input type='text' class='form-control validName' placeholder='Function Name' aria-label='Function Name' aria-describedby='basic-addon4'>\
+                            <input type='text' class='form-control validName funcName' placeholder='Function Name' aria-label='Function Name' aria-describedby='basic-addon4'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='right' data-content='Invalid Name'>\
                         </div>\
                         <div class='col-xl-6 col-lg-6 col-md-6 col-6 paramDiv'>\
                             <div class='input-group repeatableParamListGroup'>\
-                                <input type='text' class='form-control validName' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'>\
-                                <input type='text' class='form-control validName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'>\
+                                <input type='text' class='form-control validName paramType' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
+                                <input type='text' class='form-control validName paramName' placeholder='Parameter Name' aria-label='Parameter Name' aria-describedby='basic-addon2'\
+                             tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
                                 <div class='input-group-append'>\
                                     <button class='btn btn-outline-secondary addParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another parameter'>+</button>\
                                     <button class='btn btn-outline-secondary delParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Delete this parameter' style='pointer-events: none;' disabled>-</button>\
@@ -108,47 +115,145 @@ $(document).ready(function() {
     // END: Cosmetic change to display file type selected in the dropdown.
 
     // START : Code Download Functionality (includes form submission without forms per se)
+
+
     $("#codeDownload").on('click', function(event) {
-        // 0. The JSON required by render.py is mentioned
-        // 1. Get all variable values
-        // 2. Organise them in the inputData JS Object
-        // 3. Send a POST to necessary URL
-        // 4. Get back file.
+        isErraneousForm = true;
+    // 0. The JSON required by render.py is mentioned
+    // 1. Get all variable values
+    // 2. Organise them in the inputData JS Object
+    // 3. Send a POST to necessary URL
+    // 4. Get back file.
 
-        // Step 0: The JSON required by render.py is mentioned
-        // {
-        //     'pattern': 'state',
-        //     'states':[
-        //         {'name': 'S1'},
-        //         {'name': 'S2'},
-        //         {'name': 'S3'}
-        //     ],
-        //     'functions':[
-        //         {
-        //             'name': 'f1', 
-        //             'param_types':['int', 'float'], 
-        //             'param_names':['i1', 'f1'], 
-        //             'return': 'void'
-        //         },
-        //         {
-        //             'name': 'f2',
-        //             'param_types':['int', 'double'],
-        //             'param_names':['i2', 'd2'],
-        //             'return': 'double'
-        //         }
-        //     ]
-        // }
-
-        // Step 1: Get All variables (haha, seems so simple :) )
-
-        function getStatesList(){
-            var statesList = [];
-            $(".validName").each(function(index, el) {
-                statesList.push($(this).val());
-            });
-            return statesList;
+    // Step 0: The JSON required by render.py is mentioned
+    // {
+    //     'pattern': 'state',
+    //     'states':[
+    //         {'name': 'S1'},
+    //         {'name': 'S2'},
+    //         {'name': 'S3'}
+    //     ],
+    //     'functions':[
+    //         {
+    //             'name': 'f1', 
+    //             'param_types':['int', 'float'], 
+    //             'param_names':['i1', 'f1'], 
+    //             'return': 'void'
+    //         },
+    //         {
+    //             'name': 'f2',
+    //             'param_types':['int', 'double'],
+    //             'param_names':['i2', 'd2'],
+    //             'return': 'double'
+    //         }
+    //     ]
+    // }
+    function checkPopover(fn) {
+        function inner(scope) {
+            var ele = scope.find(".funcName");
+            if(ele.attr('isValidInput')=="true"){
+                return fn(ele);
+            }
+            else{
+                ele.popover('show');
+            }
         }
-        console.log(getStatesList());
+        return inner
+    };
+    function getFuncName(ele) {
+        console.log("name:",ele);
+        console.log(ele.val());
+        return ele.val();
+    }
+    getFuncName = checkPopover(getFuncName);
+
+    // Step 1: Get All variables (haha, seems so simple :) )
+    var isErraneousForm=[];
+
+    function getParamTypesList(scope) {
+        var paramTypeList = [];
+        var curParamTypeChildren = scope.find('.paramType');
+        curParamTypeChildren.each(function(index, el) {
+            if($(this).attr('isValidInput')=="true"){
+                paramTypeList.push($(this).val());
+            }
+            else{
+                $(this).popover('show');
+            }
+        });
+        return paramTypeList;
+    }
+    
+    function getParamNamesList(scope) {
+        var paramNameList = [];
+        var curParamNameChildren = scope.find('.paramName');
+        curParamNameChildren.each(function(index, el) {
+            if($(this).attr('isValidInput')=="true"){
+                paramNameList.push($(this).val());
+            }
+            else{
+                $(this).popover('show');
+            }
+        });
+        return paramNameList;
+    }
+
+    // function getFuncName(scope) {
+    //     var ele = scope.find(".funcName");
+    //     if(ele.attr('isValidInput')=="true"){
+    //         return (ele.val());
+    //     }
+    //     else{
+    //         ele.popover('show');
+    //     }
+    // }
+
+    function getFuncRetType(scope) {
+        var ele = scope.find(".retTypeName");
+        if(ele.attr('isValidInput')=="true"){
+            return (ele.val());
+        }
+        else{
+            ele.popover('show');
+        }
+    }
+
+    function getStatesList(){
+        var statesList = [];
+        $(".stateName").each(function(index, el) {
+            if($(this).attr('isValidInput')=="true"){
+                statesList.push({
+                    "name":$(this).val()
+                });
+            }
+            else{
+                $(this).popover('show');
+            }
+        });
+        return statesList;
+    }
+
+    function getFunctionDeclList() {
+        // repeatableFuncDeclList
+        var functionsList = [];
+        $(".repeatableFuncDeclList").each(function(index, el) {
+            functionsList.push({
+                "name":getFuncName($(this)),
+                "param_types":getParamTypesList($(this)),
+                "param_names":getParamNamesList($(this)),
+                "return":getFuncRetType($(this))
+            });
+        });
+        return functionsList;
+    }
+    console.log(getFunctionDeclList());
+    // if()
+    // var inpData = {
+    //     "pattern":"state",
+    //     "states":getStatesList(),
+    //     "functions":getFunctionDeclList()
+    // }
+
     });
 
     // END : Code Download Functionality (includes form submission without forms per se)
@@ -158,19 +263,38 @@ $(document).ready(function() {
        var match = str.match(r);
        return match != null && str == match[0];
     }
+    $(".entireStateWrapper").on("click",".validName", function(event) {
+        $(this).popover("hide");
+    });
+
     $(".entireStateWrapper").on("input",".validName", function(event) {
-       var res = matchExact(/[A-Za-z_]+[A-Za-z0-9_]*/g,$(this).val()); //basically it's a valid variable in a language like C++
-       if(res==false){
+        // data-toggle="tooltip" data-placement="left" title="Tooltip on top"
+        var res = matchExact(/[A-Za-z_]+[A-Za-z0-9_]*/g,$(this).val()); //basically it's a valid variable in a language like C++
+        if(res==false){
             console.log("here");
+            $(this).attr("isValidInput",false);
             $(this).css('color', 'red');
-       }
-       else{
+        }
+        else{
+            $(this).attr("isValidInput",true);
             $(this).css('color', 'green');
-       }
+        }
+    });
+
+    $(".entireStateWrapper").on("focus",".validName", function(event) {
+        if($(this).attr("isValidInput") == "true"){
+            $(this).css('color', 'green');
+        }
+        else
+        {
+            $(this).css('color', 'red');
+        }
     });
 
     $(".entireStateWrapper").on("blur",".validName", function(event) {
-        $(this).css('color', 'black');
+        if($(this).attr("isValidInput") == "true"){
+            $(this).css('color', 'black');
+        }
     });
     // END : State name validation
 
