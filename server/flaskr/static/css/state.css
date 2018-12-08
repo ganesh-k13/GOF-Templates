@@ -46,6 +46,10 @@
 	border-left: 1px solid black;
 }
 
+#funcDeclDivRow{
+	max-height: 700px;
+	overflow-y: auto;
+}
 .customBorder{
 	padding-top: 5px;
 	padding-bottom: 5px;
