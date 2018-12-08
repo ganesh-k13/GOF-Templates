@@ -116,144 +116,164 @@ $(document).ready(function() {
 
     // START : Code Download Functionality (includes form submission without forms per se)
 
-
+    var errorNumber = 0;
     $("#codeDownload").on('click', function(event) {
-        isErraneousForm = true;
-    // 0. The JSON required by render.py is mentioned
-    // 1. Get all variable values
-    // 2. Organise them in the inputData JS Object
-    // 3. Send a POST to necessary URL
-    // 4. Get back file.
+        
+        // 0. The JSON required by render.py is mentioned
+        // 1. Get all variable values
+        // 2. Organise them in the inputData JS Object
+        // 3. Send a POST to necessary URL
+        // 4. Get back file.
 
-    // Step 0: The JSON required by render.py is mentioned
-    // {
-    //     'pattern': 'state',
-    //     'states':[
-    //         {'name': 'S1'},
-    //         {'name': 'S2'},
-    //         {'name': 'S3'}
-    //     ],
-    //     'functions':[
-    //         {
-    //             'name': 'f1', 
-    //             'param_types':['int', 'float'], 
-    //             'param_names':['i1', 'f1'], 
-    //             'return': 'void'
-    //         },
-    //         {
-    //             'name': 'f2',
-    //             'param_types':['int', 'double'],
-    //             'param_names':['i2', 'd2'],
-    //             'return': 'double'
-    //         }
-    //     ]
-    // }
-    function checkPopover(fn) {
-        function inner(scope) {
-            var ele = scope.find(".funcName");
-            if(ele.attr('isValidInput')=="true"){
-                return fn(ele);
+        // Step 0: The JSON required by render.py is mentioned
+        // {
+        //     'pattern': 'state',
+        //     'states':[
+        //         {'name': 'S1'},
+        //         {'name': 'S2'},
+        //         {'name': 'S3'}
+        //     ],
+        //     'functions':[
+        //         {
+        //             'name': 'f1', 
+        //             'param_types':['int', 'float'], 
+        //             'param_names':['i1', 'f1'], 
+        //             'return': 'void'
+        //         },
+        //         {
+        //             'name': 'f2',
+        //             'param_types':['int', 'double'],
+        //             'param_names':['i2', 'd2'],
+        //             'return': 'double'
+        //         }
+        //     ]
+        // }
+        var errorCheckAttributes={
+            isErraneousForm:false
+        };
+
+        function checkPopover(fn) {
+            function inner(scope,type) {
+                var ele = scope.find(type);
+                if(ele.attr('isValidInput')=="true"){
+                    return fn(ele);
+                }
+                else{
+                    errorCheckAttributes["isErraneousForm"] = true;
+                    ele.popover('show');
+                }
             }
-            else{
-                ele.popover('show');
-            }
+            return inner
+        };
+
+
+        // Step 1: Get All variables (haha, seems so simple :) )
+
+        function getParamTypesList(scope) {
+            var paramTypeList = [];
+            var curParamTypeChildren = scope.find('.paramType');
+            curParamTypeChildren.each(function(index, el) {
+                if($(this).attr('isValidInput')=="true"){
+                    paramTypeList.push($(this).val());
+                }
+                else{
+                    errorCheckAttributes["isErraneousForm"] = true;
+                    $(this).popover('show');
+                }
+            });
+            return paramTypeList;
         }
-        return inner
-    };
-    function getFuncName(ele) {
-        console.log("name:",ele);
-        console.log(ele.val());
-        return ele.val();
-    }
-    getFuncName = checkPopover(getFuncName);
+        
+        function getParamNamesList(scope) {
+            var paramNameList = [];
+            var curParamNameChildren = scope.find('.paramName');
+            curParamNameChildren.each(function(index, el) {
+                if($(this).attr('isValidInput')=="true"){
+                    paramNameList.push($(this).val());
+                }
+                else{
+                    errorCheckAttributes["isErraneousForm"] = true;
+                    $(this).popover('show');
+                }
+            });
+            return paramNameList;
+        }
 
-    // Step 1: Get All variables (haha, seems so simple :) )
-    var isErraneousForm=[];
+        function getFuncName(ele,type) {
+            return ele.val();
+        }
 
-    function getParamTypesList(scope) {
-        var paramTypeList = [];
-        var curParamTypeChildren = scope.find('.paramType');
-        curParamTypeChildren.each(function(index, el) {
-            if($(this).attr('isValidInput')=="true"){
-                paramTypeList.push($(this).val());
-            }
-            else{
-                $(this).popover('show');
-            }
-        });
-        return paramTypeList;
-    }
-    
-    function getParamNamesList(scope) {
-        var paramNameList = [];
-        var curParamNameChildren = scope.find('.paramName');
-        curParamNameChildren.each(function(index, el) {
-            if($(this).attr('isValidInput')=="true"){
-                paramNameList.push($(this).val());
-            }
-            else{
-                $(this).popover('show');
-            }
-        });
-        return paramNameList;
-    }
+        function getFuncRetType(ele,type) {
+            return ele.val();
+        }
 
-    // function getFuncName(scope) {
-    //     var ele = scope.find(".funcName");
-    //     if(ele.attr('isValidInput')=="true"){
-    //         return (ele.val());
-    //     }
-    //     else{
-    //         ele.popover('show');
-    //     }
-    // }
+        function getStatesList(){
+            var statesList = [];
+            $(".stateName").each(function(index, el) {
+                if($(this).attr('isValidInput')=="true"){
+                    statesList.push({
+                        "name":$(this).val()
+                    });
+                }
+                else{
+                    errorCheckAttributes["isErraneousForm"] = true;
+                    $(this).popover('show');
+                }
+            });
+            return statesList;
+        }
 
-    function getFuncRetType(scope) {
-        var ele = scope.find(".retTypeName");
-        if(ele.attr('isValidInput')=="true"){
-            return (ele.val());
+        function getFunctionDeclList() {
+            // repeatableFuncDeclList
+            var functionsList = [];
+            $(".repeatableFuncDeclList").each(function(index, el) {
+                functionsList.push({
+                    "name":getFuncName($(this),".funcName"),
+                    "param_types":getParamTypesList($(this)),
+                    "param_names":getParamNamesList($(this)),
+                    "return":getFuncRetType($(this),".retTypeName")
+                });
+            });
+            return functionsList;
+        }
+
+        getFuncName = checkPopover(getFuncName);
+        getFuncRetType = checkPopover(getFuncRetType);
+
+        var inpData = {
+            "pattern":"state",
+            "states":getStatesList(),
+            "functions":getFunctionDeclList()
+        }
+
+        if(!errorCheckAttributes["isErraneousForm"]){
+            // do AJAX POST and send it away, woo
+            console.log(inpData);
         }
         else{
-            ele.popover('show');
-        }
-    }
-
-    function getStatesList(){
-        var statesList = [];
-        $(".stateName").each(function(index, el) {
-            if($(this).attr('isValidInput')=="true"){
-                statesList.push({
-                    "name":$(this).val()
+            // terrible guy decided to test the system's error handling.
+            // not today bitch
+            if(errorNumber<2){
+                $("#errorModal").on('show.bs.modal', function(event) {
+                    $("#errorModalBody").text("Check and correct the inputs which are being pointed to.Whenever you are ready, click Download again.");
                 });
+                $("#errorModal").modal("toggle");
+            }
+            else if(errorNumber<4){
+                $("#errorModal").on('show.bs.modal', function(event) {
+                    $("#errorModalBody").text("Correct the inputs which are being pointed to.");
+                });
+                $("#errorModal").modal("toggle");
             }
             else{
-                $(this).popover('show');
+                $("#errorModal").on('show.bs.modal', function(event) {
+                    $("#errorModalBody").text("Ok now, read the entries and enter properly.");
+                });
+                $("#errorModal").modal("toggle");
             }
-        });
-        return statesList;
-    }
-
-    function getFunctionDeclList() {
-        // repeatableFuncDeclList
-        var functionsList = [];
-        $(".repeatableFuncDeclList").each(function(index, el) {
-            functionsList.push({
-                "name":getFuncName($(this)),
-                "param_types":getParamTypesList($(this)),
-                "param_names":getParamNamesList($(this)),
-                "return":getFuncRetType($(this))
-            });
-        });
-        return functionsList;
-    }
-    console.log(getFunctionDeclList());
-    // if()
-    // var inpData = {
-    //     "pattern":"state",
-    //     "states":getStatesList(),
-    //     "functions":getFunctionDeclList()
-    // }
-
+            errorNumber++;
+            console.log(errorNumber);
+        }
     });
 
     // END : Code Download Functionality (includes form submission without forms per se)
@@ -263,7 +283,7 @@ $(document).ready(function() {
        var match = str.match(r);
        return match != null && str == match[0];
     }
-    $(".entireStateWrapper").on("click",".validName", function(event) {
+    $(".entireStateWrapper").on("focus",".validName", function(event) {
         $(this).popover("hide");
     });
 
