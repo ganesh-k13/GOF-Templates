@@ -249,6 +249,24 @@ $(document).ready(function() {
         if(!errorCheckAttributes["isErraneousForm"]){
             // do AJAX POST and send it away, woo
             console.log(inpData);
+
+            $.ajax({
+                url: "commonCodeCreate",
+                type: "POST",
+                dataType: "JSON",
+                data: JSON.stringify(inpData),
+                contentType:"application/json; charset=UTF-8"
+            })
+            .done(function() {
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
         }
         else{
             // terrible guy decided to test the system's error handling.

@@ -46,6 +46,16 @@ def mediator():
 def iterator():
     return render_template("patterns/iterator.html", title="Iterator")
 
+@app.route("/commonCodeCreate",methods=["POST"])
+def commonCodeCreate():
+    payload = request.get_json()
+    print(payload)
+    return jsonify({"success":1})
+    # return redirect(url_for("codeDownload",
+    #                         filename=payload["pattern"]+fileType, 
+    #                         patternType="state", 
+    #                         fileType=fileType))    
+
 @app.route("/codeCreateForState", methods=["POST"])
 def codeCreateForState():
     try:
