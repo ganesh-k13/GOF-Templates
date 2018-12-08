@@ -95,9 +95,9 @@
                                 </div>
                             </div>
                             <div class="row" id="funcDeclDivRow">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 customBorder funcToDelete noPadColumn">
                                     <div class="container-fluid repeatableFuncDeclList">
-                                        <div class="row dummyToDelete">
+                                        <div class="row">
                                             <div class="col-xl-2 col-lg-2 col-md-2 col-2">
                                                 <input type="text" class="form-control" placeholder="Return Type" aria-label="Return Type" aria-describedby="basic-addon3">
                                             </div>
@@ -135,7 +135,23 @@
             </div>
         </div>
     </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-8">
+            
+            <button class="btn btn-secondary btn-block dropdown-toggle" id="placeholderChange" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">What file format would you like?</button>
+            <div class="dropdown-menu" name="fileType">
+                <h6 class="dropdown-header">What file format would you like?</h6>
+                <a class="dropdown-item fileType" value=".tar.gz">.tar.gz</a>
+                <a class="dropdown-item fileType" value=".tar.bz2">.tar.bz2</a>
+                <a class="dropdown-item fileType" value=".tar.xz">.tar.xz</a>
+                <a class="dropdown-item fileType" value=".zip">.zip</a>
+            </div>
 
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-4">
+            <button type="button" class="btn btn-success btn-block">Download Code!</button>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

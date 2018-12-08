@@ -50,6 +50,7 @@ footer a:focus {
     top: 0px;
     left: 0px;
     /*height: 50px;*/
+    z-index: 9999;
     width: 100%;
     background-color: #141411;
     color: #FFFFFF;

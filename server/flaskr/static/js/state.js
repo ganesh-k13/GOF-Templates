@@ -50,9 +50,9 @@ $(document).ready(function() {
     $("#funcDeclWrapperRow").on('click', '.addFuncDeclBtn', function(event) {
         console.log("addParameterTypeBtn");
         $("#funcDeclDivRow").append("\
-            <div class='col-xl-12 col-lg-12 col-md-12 col-12'>\
+            <div class='col-xl-12 col-lg-12 col-md-12 col-12 customBorder funcToDelete noPadColumn'>\
                 <div class='container-fluid repeatableFuncDeclList'>\
-                    <div class='row dummyToDelete'>\
+                    <div class='row'>\
                         <div class='col-xl-2 col-lg-2 col-md-2 col-2'>\
                             <input type='text' class='form-control' placeholder='Return Type' aria-label='Return Type' aria-describedby='basic-addon3'>\
                         </div>\
@@ -85,9 +85,15 @@ $(document).ready(function() {
 
     $("#funcDeclWrapperRow").on('click', '.delFuncDeclBtn', function(event) {
         console.log("delParameterTypeBtn");
-        var eleToBeDeleted = $(this).parents(".dummyToDelete");
+        var eleToBeDeleted = $(this).parents(".funcToDelete");
         console.log(eleToBeDeleted);
         eleToBeDeleted.remove();        
     });    
     
+    $(".fileType").on('click', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        $("#placeholderChange").text($(this).text());
+    });
+
 });
