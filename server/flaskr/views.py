@@ -88,11 +88,8 @@ def codeDownload(filename,patternType,fileType):
                            fileType=fileType)
 
         print("Path:",os.path.join(app.config["USER_DOWNLOAD_FOLDER"],filename))
-        print("-----------------------")
-        print("here again")
-        print("-----------------------")
-        return send_from_directory("./downloads/",filename,as_attachment=True)
-        # return send_file("downloads/state.tar.gz")
+
+        return send_from_directory(app.config["USER_DOWNLOAD_FOLDER"],filename,as_attachment=True)
     else:
         print("codeDownload error")
         return (render_template("index.html",isError=True,errorMessage="Please create code by choosing a pattern first."),302)
