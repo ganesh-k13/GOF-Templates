@@ -3,14 +3,16 @@ $(document).ready(function() {
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    
-    $("#patternSearchBox").on('focus', function(event) {
-        $(this).css('border-bottom', '5px solid #164719');
+    var originalPatternSearchBoxWrapperColor = $("#patternSearchBoxWrapper").css("background-color");
+    $("#patternSearchBoxWrapper").focusin(function(event) {
+        $(this).css('background-color', '#FFFFFF');
     });
-    $("#patternSearchBox").on('blur', function(event) {
-        $(this).css('border-bottom', '1px solid black');
+    $("#patternSearchBoxWrapper").focusout(function(event) {
+        $(this).css('background-color', originalPatternSearchBoxWrapperColor);
     });
-    
+
+
+
     var patternArr = [
         "state",
         "adapter",
@@ -90,4 +92,13 @@ $(document).ready(function() {
             });
         });
     });
+
+    // START : Clear button functionality
+    $("#searchClearBtn").on('click', function(event) {
+        $("#patternSearchBox").val("");        
+        $(".patternDivCol").each(function(index, el) {
+            $(this).css('display', 'block');;
+        }); 
+    });
+    // END : Clear button functionality
 });

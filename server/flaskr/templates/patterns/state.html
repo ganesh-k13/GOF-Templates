@@ -1,106 +1,165 @@
 {% extends "base.html" %}
 
 {% block customCSS %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='./css/state.css') }}">
 {% endblock %}
 
 {% block customContent %}
-<!-- {
-	'pattern': 'state',
-	
-	'states':[ {
-			'name': 'S1'
-		}
-		,{
-			'name': 'S2'
-		}
-		,{
-			'name': 'S3'
-		}
-	],
-	
-	'functions':[ {
-			'name': 'f1', 'param_types': ['int', 'float'], 'param_names': ['i1', 'f1'], 'return': 'void'
-		}
-		,{
-			'name': 'f2', 'param_types': ['int', 'double'], 'param_names': ['i2', 'd2'], 'return': 'double'
-		}
-	]
-}
- -->
 
-<div class="container">
-	<div class="row">
-		
-		<form method="POST" action={{ url_for("codeCreateForState") }}>
-			<div class="col-xl-12 col-lg-12 col-md-12 col-12 headings">
-				Enter {{ inpValueField1 }} as Comma-separated-values (CSV):
-				<input class="form form-control" type="text" name="statesList">
-			</div>
-			
-			<div class="col-xl-12 col-lg-12 col-md-12 col-12" style="margin-top: 10px">
-				<div class="headings">Enter {{ inpValueField2 }} definitions:</div>
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3 textCenter">
-								<button type="button" class="btn btn-info addBtn" >Add</button>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-6">
-								<select class="form-control textCenter" name="fileType">
-									<option value="" disabled selected>What file format would you like?</option>
-									<option value=".tar.gz">.tar.gz</option>
-									<option value=".tar.bz2">.tar.bz2</option>
-									<option value=".tar.xz">.tar.xz</option>
-									<option value=".zip">.zip</option>
-								</select>
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3 textCenter">
-								<input type="submit" class="btn btn-success" value="Download">
-							</div>
+<div class="container-fluid entireStateWrapper">
+    <div class="row" style="border-bottom: 1px solid black">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-3 noPadColumn" id="stateNameWrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12" id="stepsRowName">
+                        Step 1.
+                    </div>
+                </div>
+                <hr class="fancyHorLine2">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12" id="stepsRowInfo">
+                        Enter States
+                    </div>
+                </div>
+                <hr class="fancyHorLine1">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 monkeyPatchShiftToRight">
+                        State Name
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12" id="stateListColDiv">
+                        <div class="input-group repeatableStateListGroup">
+                            <input type="text" class="form-control shadow-none validName stateName" placeholder="State Name" aria-label="State Name" aria-describedby="basic-addon2" tabindex="0" data-toggle="popover" data-trigger="manual" data-placement="left" data-content="Invalid Name">
 
-						</div>
-					</div>
-					<div class="container" style="margin-top: 10px" id="mainContainer">
-						<div class="row">
-							<div class="col-xl-1 col-lg-1 col-md-1 col-1">
-								Return Type
-							</div>
-							<div class="col-xl-1 col-lg-1 col-md-1 col-1">
-								Function Name
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3">
-								Enter Parameter Types as CSV
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3">
-								Enter Parameter Names as CSV
-							</div>
-							<div class="col-xl-2 col-lg-2 col-md-2 col-2">
-							</div>
-						</div>
-						<div class="row repeatableElement" id="row1">
-							<div class="col-xl-1 col-lg-1 col-md-1 col-1">
-								<input class="form form-control" type="text" name="retType">
-							</div>
-							<div class="col-xl-1 col-lg-1 col-md-1 col-1">
-								<input class="form form-control" type="text" name="funcName">
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3">
-								<input class="form form-control" type="text" name="paramTypeList">
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-3">
-								<input class="form form-control" type="text" name="paramNameList">
-							</div>
-							<div class="col-xl-2 col-lg-2 col-md-2 col-2">
-								<button type="button" class="btn btn-danger removeBtn" >Remove</button>
-							</div>
-						</div>
-					</div>
-			</div>
-		</form>
+                            <div class="input-group-append">
 
-	</div>
+                                <button class="btn btn-outline-secondary addStateBtn" type="button" data-toggle="tooltip" data-placement="top" title="Add another state">+</button>
+                                <button class="btn btn-outline-secondary delStateBtn" type="button" data-toggle="tooltip" data-placement="top" title="Delete this state" style="pointer-events: none;" disabled>-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-9 noPadColumn" id="funcDeclWrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12" id="stepsRowName">
+                        Step 2.
+                    </div>
+                </div>
+                <hr class="fancyHorLine2">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12" id="stepsRowInfo">
+                        Function Declaration 
+                    </div>
+                </div>
+                <hr class="fancyHorLine1">
+                <div class="row" id="funcDeclWrapperRow">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                    <span class="monkeyPatchShiftToRight"> Return Type </span>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                    <span class="monkeyPatchShiftToRight"> Function Name </span>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                    <span class="monkeyPatchShiftToRight"> Parameter Types </span>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-6">
+                                    <span style="margin-left: 50px;"> Parameter Names </span>
+                                </div>
+                            </div>
+                            <div class="row" id="funcDeclDivRow">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 customBorder funcToDelete noPadColumn">
+                                    <div class="container-fluid repeatableFuncDeclList">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                                <input type="text" class="form-control validName retTypeName" placeholder="Return Type" aria-label="Return Type" aria-describedby="basic-addon3" tabindex="0" data-toggle="popover" data-trigger="manual" data-placement="left" data-content="Invalid Name">
+                                            </div>
+
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                                <input type="text" class="form-control validName funcName" placeholder="Function Name" aria-label="Function Name" aria-describedby="basic-addon4" tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='top' data-content='Invalid Name'>
+                                            </div>
+
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-6 paramDiv">
+                                                <div class="input-group repeatableParamListGroup">
+                                                    <input type="text" class="form-control validName paramType" placeholder="Parameter Type" aria-label="Parameter Type" aria-describedby="basic-addon2" tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>
+
+                                                    <input type="text" class="form-control validName paramName" placeholder="Parameter Name" aria-label="Parameter Name" aria-describedby="basic-addon2" tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary addParameterBtn" type="button" data-toggle="tooltip" data-placement="top" title="Add another parameter">+</button>
+                                                        <button class="btn btn-outline-secondary delParameterBtn" type="button" data-toggle="tooltip" data-placement="top" title="Delete this parameter" style="pointer-events: none;" disabled>-</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-2">
+                                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                        <button class="btn btn-secondary addFuncDeclBtn" type="button" data-toggle="tooltip" data-placement="top" title="Add another function">Add</button>
+                                                        <button class="btn btn-danger delFuncDeclBtn" type="button" data-toggle="tooltip" data-placement="top" title="Delete this function" disabled>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-8">
+            
+            <button class="btn btn-secondary btn-block dropdown-toggle" id="fileTypeBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">What file format would you like the code to be downloaded in?</button>
+            <div class="dropdown-menu" name="fileType">
+                <h6 class="dropdown-header">What file format would you like the code to be downloaded in?</h6>
+                <a class="dropdown-item fileType" value=".tar.gz">.tar.gz</a>
+                <a class="dropdown-item fileType" value=".tar.bz2">.tar.bz2</a>
+                <a class="dropdown-item fileType" value=".tar.xz">.tar.xz</a>
+                <a class="dropdown-item fileType" value=".zip">.zip</a>
+            </div>
+
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-4">
+            <button type="button" class="btn btn-info btn-block" id="codeDownload">Create Code!</button>
+        </div>
+        <div>
+            <form method="POST" id="downloadCodeForm" action={{ url_for("downloadCode") }}>
+                <input name="hiddenCodeDownload" value="yes" hidden>
+                <input type="submit" class="btn btn-success btn-block" id="codeForDownload" value="Download Code!" hidden>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalTitle">Error in entries</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="errorModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 
 {% endblock %}
 
 {% block customJS %}
+    <script src="{{ url_for('static',filename='./js/State/state.js') }}"></script>
 {% endblock %}

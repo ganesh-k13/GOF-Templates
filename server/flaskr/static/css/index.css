@@ -50,6 +50,7 @@ footer a:focus {
     top: 0px;
     left: 0px;
     /*height: 50px;*/
+    z-index: 9999;
     width: 100%;
     background-color: #141411;
     color: #FFFFFF;
@@ -117,13 +118,18 @@ footer a:focus {
     font-size: 30px;
 }
 
+#patternSearchBoxWrapper
+{
+    border-bottom: 1px solid black;    
+}
+
 #patternSearchBox
 {
     font-size: 30px;
     border-left: none;
     border-right: none;
     border-top: none;
-    border-bottom: 1px solid black;
+    border-bottom: none;
     border-radius: 0px;
     box-shadow: none;
     -moz-box-shadow: none;
@@ -180,6 +186,34 @@ footer a:focus {
     text-align: center;
 }
 
+#searchClearBtn{
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000000;
+    border-radius: 0px;
+    background-color: inherit;
+}
+
+#searchClearBtn:hover{
+    color: #C40000;
+    border-radius: 0px;
+    background-color: inherit;
+}
+
+#searchClearBtn:focus {
+    outline:0;
+}
+.popover{
+    z-index: 1000!important;
+}
+.modal-backdrop.show{
+    /*z-index: 99999!important;*/
+}
+.modal-content{
+    z-index: 99999!important;
+}
 /*
     End - Writing your custom CSS here, or make your own CSS file.
 */
