@@ -15,9 +15,9 @@ def dummy_input(pattern = None):
 	
 	if(pattern = 'iterator'):
 		return json.dumps( {'pattern': 'iterator',
-							'container': 'C1',
-							'iterator': 'I1'
-		
+							'container_name': 'C1',
+							'iterator_name': 'I1',
+							'supported_types': ['int', 'float', 'std::string']
 							}
 						 )
 	
