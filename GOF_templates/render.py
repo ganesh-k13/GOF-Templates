@@ -1,4 +1,5 @@
 # import utils
+import json
 from jinja2 import Template
 import os, sys
 
@@ -146,8 +147,13 @@ class Iterator(Pattern):
 	def render(self):
 		# Create output
 		dirname = os.path.dirname(os.path.abspath(__file__))
-		try: 
+		try:
 			os.makedirs(dirname + '/templates/output')
+		except(FileExistsError):
+			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
+			pass
+		
+		try: 
 			os.makedirs(dirname + '/templates/output/Iterator')
 			os.makedirs(dirname + '/templates/output/Iterator/include')
 			os.makedirs(dirname + '/templates/output/Iterator/obj')
@@ -170,7 +176,7 @@ class Iterator(Pattern):
 			template = Template(f.read())
 		
 		with open(dirname + '/templates/output/Iterator/src/container.cpp', 'w') as f:
-			f.write(template.render(container_name=self.meta['container_name'], iterator_name=self.meta['iterator_name']))
+			f.write(template.render(container_name=self.meta['container_name'], supported_types=self.meta['supported_types']))
 		
 		# utils.h
 		with open(dirname + '/templates/Iterator/include/utils.h', 'r') as f:
@@ -187,8 +193,19 @@ class Iterator(Pattern):
 			f.write(template.render())
 		
 		#test.cpp
-		with open(dirname + '/templates/State/test.cpp', 'r') as f:
+		with open(dirname + '/templates/Iterator/test.cpp', 'r') as f:
 			template = Template(f.read())
 		
-		with open(dirname + '/templates/output/state/test.cpp', 'w') as f:
+		with open(dirname + '/templates/output/Iterator/test.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name']))
+			
+if __name__ == '__main__':
+	payload = json.dumps( {'pattern': 'iterator',
+							'container_name': 'C1',
+							'iterator_name': 'I1',
+							'supported_types': ['int', 'float', 'std::string']
+							}
+						 )
+						 
+	i = Iterator(json.loads(payload))
+	i.render()

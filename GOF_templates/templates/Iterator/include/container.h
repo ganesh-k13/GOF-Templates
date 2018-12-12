@@ -10,7 +10,7 @@ class {{container_name}} {
 		{{container_name}}(int n);
 		~{{container_name}}();
 
-		class {{{{iterator_name}}_name}} {
+		class {{iterator_name}} {
 			private:
 				T *p_it_;
 			public:
