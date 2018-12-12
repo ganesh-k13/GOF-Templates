@@ -67,7 +67,7 @@ def commonCodeCreate():
 		s = render.State(json.loads(json.dumps(payload)))
 		s.render()
 	if(payload["pattern"] == "iterator"): # See if there's a way to avoid this via inheritance
-		tempGlobalVars["pattern"] = "iterator"
+		tempGlobalVars["pattern"] = "Iterator"
 		s = render.Iterator(json.loads(json.dumps(payload)))
 		s.render()
 	return jsonify({"success":1})
