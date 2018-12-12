@@ -1,11 +1,11 @@
-#include "include/carray.h"
+#include "include/container.h"
 #include "include/utils.h"
 #include <vector>
 
 int main() {
 	std::cout << std::endl << "------ Iterator Pattern Tests ------" << std::endl;
 
-	CArray<int> arr(10);
+	{{container_name}}<int> arr(10);
 	int i = 0;
 	for(auto it = arr.begin(); it != arr.end(); ++it, ++i) {
 		*it = i;
@@ -17,7 +17,7 @@ int main() {
 
 	disp(arr.begin(), arr.end());	
 
-	CArray<float> arr_f(10);
+	{{container_name}}<float> arr_f(10);
 	float j = 0.0;
 	for(auto it = arr_f.begin(); it != arr_f.end(); ++it, ++j) {
 		*it = j;
@@ -29,7 +29,7 @@ int main() {
 
 	disp(arr_f.begin(), arr_f.end());
 
-	CArray<std::string> arr_s(10);
+	{{container_name}}<std::string> arr_s(10);
 	std::vector<std::string> str_arr = {"first", "second", "third", "fourth", "fifth", \
 										"sixth", "seventh", "eigth", "nineth", "tenth"};
 	i = 0;

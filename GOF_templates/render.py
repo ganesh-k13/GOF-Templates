@@ -137,3 +137,58 @@ class Policy(Pattern):
 		
 		with open(dirname + '/templates/output/policy/test.cpp', 'w') as f:
 			f.write(template.render(functions=self.meta['functions'], policies=self.meta['policies']))
+
+class Iterator(Pattern):
+	
+	def __init__(self, meta):
+		Pattern.__init__(self, meta)
+	
+	def render(self):
+		# Create output
+		dirname = os.path.dirname(os.path.abspath(__file__))
+		try: 
+			os.makedirs(dirname + '/templates/output')
+			os.makedirs(dirname + '/templates/output/Iterator')
+			os.makedirs(dirname + '/templates/output/Iterator/include')
+			os.makedirs(dirname + '/templates/output/Iterator/obj')
+			os.makedirs(dirname + '/templates/output/Iterator/src')
+
+			print("\n\nNew Files Created!\n\n")
+		except(FileExistsError):
+			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
+			pass
+		
+		# container.h
+		with open(dirname + '/templates/Iterator/include/container.h', 'r') as f:
+			template = Template(f.read())
+		
+		with open(dirname + '/templates/output/Iterator/include/container.h', 'w') as f:
+			f.write(template.render(container_name=self.meta['container_name'], iterator_name=self.meta['iterator_name']))
+		
+		# container.cpp
+		with open(dirname + '/templates/Iterator/src/container.cpp', 'r') as f:
+			template = Template(f.read())
+		
+		with open(dirname + '/templates/output/Iterator/src/container.cpp', 'w') as f:
+			f.write(template.render(container_name=self.meta['container_name'], iterator_name=self.meta['iterator_name']))
+		
+		# utils.h
+		with open(dirname + '/templates/Iterator/include/utils.h', 'r') as f:
+			template = Template(f.read())
+		
+		with open(dirname + '/templates/output/Iterator/include/utils.h', 'w') as f:
+			f.write(template.render())
+		
+		# makefile
+		with open(dirname + '/templates/Iterator/makefile', 'r') as f:
+			template = Template(f.read())
+		
+		with open(dirname + '/templates/output/Iterator/makefile', 'w') as f:
+			f.write(template.render())
+		
+		#test.cpp
+		with open(dirname + '/templates/State/test.cpp', 'r') as f:
+			template = Template(f.read())
+		
+		with open(dirname + '/templates/output/state/test.cpp', 'w') as f:
+			f.write(template.render(container_name=self.meta['container_name']))
