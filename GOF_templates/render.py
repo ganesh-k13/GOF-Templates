@@ -25,6 +25,11 @@ class Pattern:
 			# Only folder exists, the file can still be modified
 			# print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
 			pass
+			
+		# Create meta file
+		with open(self.dirname + '/templates/output/%s/meta.json'%self.meta['pattern'], 'w') as f:
+			print(self.meta)
+			json.dump(self.meta, f, indent=4)
 	
 	def render(self):
 		raise NotImplementedError("Subclass must implement abstract method")
@@ -172,9 +177,6 @@ class Iterator(Pattern):
 		with open(self.dirname + '/templates/output/iterator/test.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name']))
 		
-		with open(self.dirname + '/templates/output/iterator/meta.json', 'w') as f:
-			print(self.meta)
-			json.dump(self.meta, f, indent=4)
 		
 if __name__ == '__main__':
 	payload = json.dumps( {'pattern': 'iterator',
