@@ -114,9 +114,13 @@
             </div>
         </div>
     </div>   
+	{% block buttons %}
+		{{ super() }}
+	{% endblock %}
 </div>
 
 {% endblock %}
+
 
 {% block customJS %}
     <script src="{{ url_for('static',filename='./js/State/state.js') }}"></script>
