@@ -140,41 +140,43 @@ class Iterator(Pattern):
 		Pattern.__init__(self, meta)
 	
 	def render(self):
+		
 		# container.h
 		with open(self.dirname + '/templates/Iterator/include/container.h', 'r') as f:
 			template = Template(f.read())
 		
-		with open(self.dirname + '/templates/output/Iterator/include/container.h', 'w') as f:
+		with open(self.dirname + '/templates/output/iterator/include/container.h', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name'], iterator_name=self.meta['iterator_name']))
 		
 		# container.cpp
 		with open(self.dirname + '/templates/Iterator/src/container.cpp', 'r') as f:
 			template = Template(f.read())
 		
-		with open(self.dirname + '/templates/output/Iterator/src/container.cpp', 'w') as f:
+		with open(self.dirname + '/templates/output/iterator/src/container.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name'], supported_types=self.meta['supported_types']))
 		
 		# utils.h
 		with open(self.dirname + '/templates/Iterator/include/utils.h', 'r') as f:
 			template = Template(f.read())
 		
-		with open(self.dirname + '/templates/output/Iterator/include/utils.h', 'w') as f:
+		with open(self.dirname + '/templates/output/iterator/include/utils.h', 'w') as f:
 			f.write(template.render())
 		
 		# makefile
 		with open(self.dirname + '/templates/Iterator/makefile', 'r') as f:
 			template = Template(f.read())
 		
-		with open(self.dirname + '/templates/output/Iterator/makefile', 'w') as f:
+		with open(self.dirname + '/templates/output/iterator/makefile', 'w') as f:
 			f.write(template.render())
 		
 		#test.cpp
 		with open(self.dirname + '/templates/Iterator/test.cpp', 'r') as f:
 			template = Template(f.read())
 		
-		with open(self.dirname + '/templates/output/Iterator/test.cpp', 'w') as f:
+		with open(self.dirname + '/templates/output/iterator/test.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name']))
-			
+		
+		
 if __name__ == '__main__':
 	payload = json.dumps( {'pattern': 'iterator',
 							'container_name': 'C1',
