@@ -64,7 +64,7 @@ def commonCodeCreate():
 		s.render()
 
 	elif(payload["pattern"] == "iterator"): # See if there's a way to avoid this via inheritance
-		session["pattern"] = "Iterator"
+		session["pattern"] = "iterator"
 		s = render.Iterator(json.loads(json.dumps(payload)))
 		s.render()
 
