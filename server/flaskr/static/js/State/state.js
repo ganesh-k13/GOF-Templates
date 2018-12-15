@@ -248,7 +248,7 @@ $(document).ready(function() {
         }
         console.log("inpData:",inpData)
         if(!errorCheckAttributes["isErraneousForm"]){
-            // do AJAX POST and send it away, woo
+            // do AJAX POST and send it away
             console.log(inpData);
 
             $.ajax({
