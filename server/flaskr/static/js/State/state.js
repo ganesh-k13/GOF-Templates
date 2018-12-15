@@ -261,7 +261,7 @@ $(document).ready(function() {
             .done(function(info) {
                 console.log("success");
                 console.log("success info:",info);
-                if(info["success"]==1)
+                if(info["success"]==true)
                 {
                     $("#downloadCodeForm").submit(); //download the code. AJAX can't download by itself
                 }

@@ -6,7 +6,7 @@ $(document).ready(function() {
         var eleToBeAddedTo = $(this).parents(".paramDiv");
         eleToBeAddedTo.append("\
             <div class='input-group repeatableParamListGroup'>\
-                <input type='text' class='form-control validName paramType' placeholder='Parameter Type' aria-label='Parameter Type' aria-describedby='basic-addon2'\
+                <input type='text' class='form-control validName paramType' placeholder='Data Type' aria-label='Parameter Type' aria-describedby='basic-addon2'\
                              tabindex='0' data-toggle='popover' data-trigger='manual' data-placement='left' data-content='Invalid Name'>\
                 <div class='input-group-append'>\
                     <button class='btn btn-outline-secondary addParameterBtn' type='button' data-toggle='tooltip' data-placement='top' title='Add another parameter'>+</button>\
@@ -19,9 +19,9 @@ $(document).ready(function() {
 
     // START: Delete a paramter functionality.
     $("#funcDeclWrapperRow").on('click', '.delParameterBtn', function(event) {
-        console.log("delParameterTypeBtn");
+        // console.log("delParameterTypeBtn");
         var eleToBeDeleted = $(this).parents(".repeatableParamListGroup");
-        console.log(eleToBeDeleted);
+        // console.log(eleToBeDeleted);
         eleToBeDeleted.remove();        
     });
     // END: Delete a paramter functionality.

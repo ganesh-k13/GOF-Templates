@@ -12,11 +12,6 @@ from GOF_templates import render
 
 from server.flaskr import utils
 
-tempGlobalVars = {
-	"pattern":"state",	 # this name doesn't matter, just a filename for user download
-	"fileType":".tar.gz" # if user forgot to set option then set .tar.gz as default
-}
-
 app.secret_key = 'secretkeyhereplease'
 
 @app.route("/")
@@ -54,36 +49,40 @@ def iterator():
 @app.route("/commonCodeCreate",methods=["POST"])
 def commonCodeCreate():
 	payload = request.get_json()
+	session["fileType"] = ".tar.gz"
 	
 	if(len(payload["fileType"])<=8): # else, use what user chose
-		tempGlobalVars["fileType"] = payload["fileType"]
+		session["fileType"] = payload["fileType"]
 	
 	del payload["fileType"]
 
 	print(payload)
 
 	if(payload["pattern"] == "state"): # See if there's a way to avoid this via inheritance
-		tempGlobalVars["pattern"] = "state"
+		session["pattern"] = "state"
 		s = render.State(json.loads(json.dumps(payload)))
 		s.render()
-	if(payload["pattern"] == "iterator"): # See if there's a way to avoid this via inheritance
-		tempGlobalVars["pattern"] = "Iterator"
+
+	elif(payload["pattern"] == "iterator"): # See if there's a way to avoid this via inheritance
+		session["pattern"] = "Iterator"
 		s = render.Iterator(json.loads(json.dumps(payload)))
 		s.render()
-	return jsonify({"success":1})
+
+	return jsonify({
+			"success":True
+		})
 
 
 @app.route("/downloadCode",methods=["POST"])
 def downloadCode():
 
 	return redirect(url_for("codeDownload",
-						filename=tempGlobalVars["pattern"] + tempGlobalVars["fileType"], 
-						patternType=tempGlobalVars["pattern"], 
-						fileType=tempGlobalVars["fileType"]))
+						filename=session.get("pattern") + session.get("fileType"), 
+						patternType=session.get("pattern"), 
+						fileType=session.get("fileType")))
 
 @app.route("/codeDownload/<path:filename>/<path:patternType>/<path:fileType>")
 def codeDownload(filename,patternType,fileType):
-	print(tempGlobalVars)
 	if(fileType in app.config["ALLOWED_COMPRESSED_FILE_EXTENSIONS"]):
 		beautify_cmd = "astyle --style=attach -s4 -xG -xe -YFpCHUSK --recursive ./GOF_templates/templates/output/" + patternType + "/*.cpp,*.h"
 		os.system(beautify_cmd)
