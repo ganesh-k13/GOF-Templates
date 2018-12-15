@@ -150,7 +150,8 @@ class Iterator(Pattern):
 		try:
 			os.makedirs(dirname + '/templates/output')
 		except(FileExistsError):
-			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
+			# Only folder exists, the file can still be modified
+			# print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
 			pass
 		
 		try: 
@@ -158,10 +159,10 @@ class Iterator(Pattern):
 			os.makedirs(dirname + '/templates/output/Iterator/include')
 			os.makedirs(dirname + '/templates/output/Iterator/obj')
 			os.makedirs(dirname + '/templates/output/Iterator/src')
-
-			print("\n\nNew Files Created!\n\n")
+			print("\n\nNew Folders Created!\n\n") # New folders created, not files
 		except(FileExistsError):
-			print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
+			# Only folder exists, the file can still be modified
+			# print("\n\nNew Files NOT Created! Delete existing files first! \n\n")
 			pass
 		
 		# container.h
@@ -198,7 +199,11 @@ class Iterator(Pattern):
 		
 		with open(dirname + '/templates/output/Iterator/test.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name']))
-			
+		
+		with open(dirname + '/templates/output/Iterator/meta.json', 'w') as f:
+			print(self.meta)
+			json.dump(self.meta, f, indent=4)
+		
 if __name__ == '__main__':
 	payload = json.dumps( {'pattern': 'iterator',
 							'container_name': 'C1',
