@@ -66,6 +66,29 @@
                 <div id="customContent">
                 {% block customContent %}
                 {% endblock %}
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-xl-8 col-lg-8 col-md-8 col-8">
+						
+						<button class="btn btn-secondary btn-block dropdown-toggle" id="fileTypeBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">What file format would you like the code to be downloaded in?</button>
+						<div class="dropdown-menu" name="fileType">
+							<h6 class="dropdown-header">What file format would you like the code to be downloaded in?</h6>
+							<a class="dropdown-item fileType" value=".tar.gz">.tar.gz</a>
+							<a class="dropdown-item fileType" value=".tar.bz2">.tar.bz2</a>
+							<a class="dropdown-item fileType" value=".tar.xz">.tar.xz</a>
+							<a class="dropdown-item fileType" value=".zip">.zip</a>
+						</div>
+
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-4 col-4">
+						<button type="button" class="btn btn-info btn-block" id="codeDownload">Create Code!</button>
+					</div>
+					<div>
+						<form method="POST" id="downloadCodeForm" action={{ url_for("downloadCode") }}>
+							<input name="hiddenCodeDownload" value="yes" hidden>
+							<input type="submit" class="btn btn-success btn-block" id="codeForDownload" value="Download Code!" hidden>
+						</form>
+					</div>
+				</div>
                 </div>
 
                 <!-- END EDITING HERE -->
