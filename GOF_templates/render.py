@@ -92,7 +92,6 @@ class Policy(Pattern):
 			fn['params'] = list(zip(fn['param_types'], fn['param_names']))
 	
 	def render(self):
-		
 		# policy.h
 		with open(self.dirname + '/templates/Policy/include/policy.h', 'r') as f:
 			template = Template(f.read())
