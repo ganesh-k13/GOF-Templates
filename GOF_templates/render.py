@@ -86,7 +86,6 @@ class Policy(Pattern):
 		dirname = os.path.dirname(os.path.abspath(__file__))
 		print("\n\nDirname for Policy: {0}\n\n".format(dirname))
 		try: 
-			# os.makedirs(dirname + '/templates/output')
 			os.makedirs(dirname + '/templates/output/policy')
 			os.makedirs(dirname + '/templates/output/policy/include')
 			os.makedirs(dirname + '/templates/output/policy/obj')

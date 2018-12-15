@@ -15,10 +15,11 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="search-box">
-        <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="patternSearchBoxDiv">
-                <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Enter a Pattern Name">
+    
+    <div class="container-fluid">
+        <div class="row" id="patternSearchBoxWrapper">
+            <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11" id="patternSearchBoxDiv">
+                <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Search a Pattern">
             </div>
             <button id="searchClearBtn">Clear</button>
         </div>
@@ -112,7 +113,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var search_bar = document.getElementById("search-box");
 
         if ($(document).height() > $(window).height()) { 
@@ -120,7 +121,7 @@
         } else {
             search_bar.style.display = 'none';
         }
-    </script>
+    </script> -->
 
 {% endblock %}
 

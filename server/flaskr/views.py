@@ -56,7 +56,8 @@ def commonCodeCreate():
 	
 	del payload["fileType"]
 
-	print(payload)
+	print("Payload Data: ", payload)
+	print("Session Data: ", session)
 
 	if(payload["pattern"] == "state"): # See if there's a way to avoid this via inheritance
 		session["pattern"] = "state"
@@ -67,6 +68,13 @@ def commonCodeCreate():
 		session["pattern"] = "Iterator"
 		s = render.Iterator(json.loads(json.dumps(payload)))
 		s.render()
+    
+	elif(payload["pattern"] == "policy"):
+		session["pattern"] = "policy"
+		s = render.Policy(json.loads(json.dumps(payload)))
+		s.render()
+	
+	print("Session Data: ", session)
 
 	return jsonify({
 			"success":True
