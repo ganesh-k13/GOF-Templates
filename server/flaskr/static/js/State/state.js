@@ -167,7 +167,7 @@ $(document).ready(function() {
         };
 
 
-        // Step 1: Get All variables (haha, seems so simple :) )
+        // Step 1: Get All variables
 
         function getParamTypesList(scope) {
             var paramTypeList = [];
@@ -277,8 +277,6 @@ $(document).ready(function() {
             
         }
         else{
-            // terrible guy decided to test the system's error handling.
-            // not today bitch
             if(errorNumber<2){
                 $("#errorModal").on('show.bs.modal', function(event) {
                     $("#errorModalBody").text("Check and correct the inputs which are being pointed to.Whenever you are ready, click Download again.");
