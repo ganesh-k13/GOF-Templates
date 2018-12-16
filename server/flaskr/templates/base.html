@@ -114,9 +114,11 @@
 </html>
 
 {% block buttons %}
+<!-- Upload Buttons JS -->
+<script src={{url_for("static",filename="js/upload.js")}}></script>
 <!-- Buttons -->
 <div class="row" style="margin-top: 10px;">
-	<div class="col-xl-8 col-lg-8 col-md-8 col-8">
+	<div class="col-xl-6 col-lg-6 col-md-6 col-6">
 		
 		<button class="btn btn-secondary btn-block dropdown-toggle" id="fileTypeBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">What file format would you like the code to be downloaded in?</button>
 		<div class="dropdown-menu" name="fileType">
@@ -130,6 +132,12 @@
 	</div>
 	<div class="col-xl-4 col-lg-4 col-md-4 col-4">
 		<button type="button" class="btn btn-info btn-block" id="codeDownload">Create Code!</button>
+	</div>
+	<div class="col-xl-2 col-lg-2 col-md-2 col-2">
+		<div class="file btn btn-secondary btn-block" data-toggle="tooltip" data-placement="right" title="Upload meta.json present in previous downloads to restore state">
+			Upload
+			<input type="file" name="file" id = "fileinput" />
+		</div>
 	</div>
 	<div>
 		<form method="POST" id="downloadCodeForm" action={{ url_for("downloadCode") }}>
@@ -156,6 +164,5 @@
 		</div>
 	</div>
 </div> 
-<!-- Upload Buttons JS -->
-<script src={{url_for("static",filename="js/upload.js")}}></script>
+
 {% endblock %}
