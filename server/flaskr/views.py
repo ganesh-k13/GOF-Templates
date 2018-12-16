@@ -33,7 +33,7 @@ def bridge():
 
 @app.route("/builder")
 def builder():
-	return render_template("patterns/builder.html", title="Mediator")
+	return render_template("patterns/builder.html", title="Builder")
 
 @app.route("/chainOfResponsibility")
 def chainOfResponsibility():
