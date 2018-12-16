@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$("#fileinput").change(UploadState.handleFileSelect);
 	
     // START: Add a state functionality.
-    $("#stateListColDiv").on("click", ".addStateBtn", function(event) {
+    $("#stateListColDiv").off('click').on("click", ".addStateBtn", function(event) {
         console.log("add clicked",$(this));
         $("#stateListColDiv").append("\
             <div class='input-group repeatableStateListGroup'>\
