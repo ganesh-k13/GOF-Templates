@@ -38,20 +38,34 @@ var Upload = {
 	}
 	
 };
-
+// #funcDeclDivRow > div:nth-child(2) > div > div > div:nth-child(2) > input
 var UploadState = Object.create(Upload);
 UploadState.receivedText = function() {
 	var data = (JSON.parse(self.fr.result));
-	console.log(data)
+	console.log(data);
 	
 	// For States
 	data['states'].forEach(function(state, i) {
-		jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > div > button.btn.btn-outline-secondary.addStateBtn").first().trigger("click")
-		jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > input").val(state.name)
-		console.log(state.name)
-	})
+		jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > div > button.btn.btn-outline-secondary.addStateBtn").first().trigger("click");
+		jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > input").val(state.name);
+		console.log(state.name);
+	});
 	// Remove Extra
-	jQuery("#stateListColDiv > div:last-child > div > button.btn.btn-outline-secondary.delStateBtn").first().trigger("click")
+	jQuery("#stateListColDiv > div:last-child > div > button.btn.btn-outline-secondary.delStateBtn").first().trigger("click");
 	
-
+	data['functions'].forEach(function(functions, i) {
+		jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(4) > div > div > button.btn.btn-secondary.addFuncDeclBtn").first().trigger("click")
+		jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(1) > input").val(functions.name)
+		jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(2) > input").val(functions.return)
+		console.log(functions.name)
+		console.log(functions.return)
+	});
+	jQuery("#funcDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").first().trigger("click")
+	// data[''].forEach(function(state, i) {
+		
+	// })
+	
+	// data[''].forEach(function(state, i) {
+		
+	// })
 }
