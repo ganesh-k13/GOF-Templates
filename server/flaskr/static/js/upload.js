@@ -48,8 +48,6 @@ var Upload = {
 // #funcDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(1) > input.form-control.validName.paramName
 
 var UploadState = Object.create(Upload);
-<<<<<<< HEAD
 var UploadPolicy = Object.create(Upload);
-=======
->>>>>>> f5a7bdea0da8655c16cbc46185d31e20fe81ea07
 var UploadIterator = Object.create(Upload);
+var UploadAdapter = Object.create(Upload);

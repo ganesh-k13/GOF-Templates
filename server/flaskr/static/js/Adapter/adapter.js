@@ -1,4 +1,65 @@
 $(document).ready(function() {
+	UploadAdapter.receivedText = UploadAdapter.receivedText.bind(UploadAdapter)
+	UploadAdapter.receivedText = function() {
+		var data = (JSON.parse(self.fr.result));
+		if(data['pattern'] != 'adapter') {
+			$("#errorModal").on('show.bs.modal', function(event) {
+				$("#errorModalBody").text("Incorrect JSON, please re-upload");
+				$("#errorModalTitle").text("JSON Error");
+			});
+			$("#errorModal").modal("toggle");
+			$("#errorModal #errorModalTitle").text("Error in entries");
+			return;
+		}
+		console.log(data);
+		
+		// #targetFuncDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(2) > input.form-control.validName.paramType
+		// #targetFuncDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(1) > div > button.btn.btn-outline-secondary.addTargetParameterBtn
+		// For target_functions
+		data['target_functions'].forEach(function(target, i) {
+			$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(4) > div > div > button.btn.btn-secondary.addFuncDeclBtn").trigger("click");
+			$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(1) > input").val(target.return)
+			$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(2) > input").val(target.name)
+			
+			target.param_types.forEach(function(param_type, j) {
+				$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > div > button.btn.btn-outline-secondary.addTargetParameterBtn").trigger("click")
+				$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramType").val(param_type)
+				console.log(param_type)
+			});
+			//#targetFuncDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(3) > div > button.btn.btn-outline-secondary.delTargetParameterBtn
+			$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:last-child > div > button.btn.btn-outline-secondary.delTargetParameterBtn").trigger("click")
+			
+			target.param_names.forEach(function(param_name, j) {
+				$("#targetFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramName").val(param_name)
+			});
+			
+		});
+		$("#targetFuncDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").trigger("click")
+		
+		data['adaptee_functions'].forEach(function(adaptee, i) {
+			$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(4) > div > div > button.btn.btn-secondary.addFuncDeclBtn").trigger("click");
+			$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(1) > input").val(adaptee.return)
+			$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(2) > input").val(adaptee.name)
+			
+			adaptee.param_types.forEach(function(param_type, j) {
+				$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > div > button.btn.btn-outline-secondary.addParameterBtn").trigger("click")
+				$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramType").val(param_type)
+				console.log(param_type)
+			});
+			//#adapteeFuncDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(3) > div > button.btn.btn-outline-secondary.delTargetParameterBtn
+			$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:last-child > div > button.btn.btn-outline-secondary.delParameterBtn").trigger("click")
+			
+			adaptee.param_names.forEach(function(param_name, j) {
+				$("#adapteeFuncDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramName").val(param_name)
+			});
+			
+		});
+		$("#adapteeFuncDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").trigger("click")
+		
+		Upload.validate();
+	}
+	UploadAdapter.handleFileSelect = UploadAdapter.handleFileSelect.bind(UploadAdapter)
+	$("#fileinput").change(UploadAdapter.handleFileSelect);
     // START: Target Class Functions
     // START: Add a paramter functionality.
     $("#targetFuncDeclWrapperRow").on('click', '.addTargetParameterBtn', function(event) {
