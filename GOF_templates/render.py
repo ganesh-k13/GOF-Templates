@@ -33,7 +33,46 @@ class Pattern:
 	
 	def render(self):
 		raise NotImplementedError("Subclass must implement abstract method")
+
+class Adapter(Pattern):
 	
+	def __init__(self, meta):
+		Pattern.__init__(self, meta)
+		for fn in self.meta['target_functions']:
+			fn['params'] = list(zip(fn['param_types'], fn['param_names']))
+		
+		for fn in self.meta['adaptee_functions']:
+			fn['params'] = list(zip(fn['param_types'], fn['param_names']))
+	
+	def render(self):		
+		# adapter.h
+		with open(self.dirname + '/templates/Adapter/include/adapter.h', 'r') as f:
+			template = Template(f.read())
+		
+		with open(self.dirname + '/templates/output/adapter/include/adapter.h', 'w') as f:
+			f.write(template.render(target_functions=self.meta['target_functions'], adaptee_functions=self.meta['adaptee_functions']))
+		
+		# adapter.cpp
+		with open(self.dirname + '/templates/Adapter/src/adapter.cpp', 'r') as f:
+			template = Template(f.read())
+		
+		with open(self.dirname + '/templates/output/adapter/src/adapter.cpp', 'w') as f:
+			f.write(template.render(num_functions=self.meta["num_functions"], target_functions=self.meta['target_functions'], adaptee_functions=self.meta['adaptee_functions']))
+		
+		# makefile
+		with open(self.dirname + '/templates/Adapter/makefile', 'r') as f:
+			template = Template(f.read())
+		
+		with open(self.dirname + '/templates/output/adapter/makefile', 'w') as f:
+			f.write(template.render())
+		
+		#test.cpp
+		with open(self.dirname + '/templates/Adapter/test.cpp', 'r') as f:
+			template = Template(f.read())
+		
+		with open(self.dirname + '/templates/output/adapter/test.cpp', 'w') as f:
+			f.write(template.render(target_functions=self.meta['target_functions'], adaptee_functions=self.meta['adaptee_functions']))
+
 class State(Pattern):
 	
 	def __init__(self, meta):
@@ -175,15 +214,3 @@ class Iterator(Pattern):
 		
 		with open(self.dirname + '/templates/output/iterator/test.cpp', 'w') as f:
 			f.write(template.render(container_name=self.meta['container_name']))
-		
-		
-if __name__ == '__main__':
-	payload = json.dumps( {'pattern': 'iterator',
-							'container_name': 'C1',
-							'iterator_name': 'I1',
-							'supported_types': ['int', 'float', 'std::string']
-							}
-						 )
-						 
-	i = Iterator(json.loads(payload))
-	i.render()

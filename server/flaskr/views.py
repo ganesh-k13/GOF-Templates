@@ -125,12 +125,17 @@ def commonCodeCreate():
 	print("Payload Data: ", payload)
 	print("Session Data: ", session)
 
-	if(payload["pattern"] == "state"): # See if there's a way to avoid this via inheritance
+	if(payload["pattern"] == "adapter"):
+		session["pattern"] = "adapter"
+		s = render.Adapter(json.loads(json.dumps(payload)))
+		s.render()
+	
+	elif(payload["pattern"] == "state"):
 		session["pattern"] = "state"
 		s = render.State(json.loads(json.dumps(payload)))
 		s.render()
 
-	elif(payload["pattern"] == "iterator"): # See if there's a way to avoid this via inheritance
+	elif(payload["pattern"] == "iterator"):
 		session["pattern"] = "iterator"
 		s = render.Iterator(json.loads(json.dumps(payload)))
 		s.render()
