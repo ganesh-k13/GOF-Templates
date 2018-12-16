@@ -1,5 +1,19 @@
 var Upload = {
     
+	validateJSON: function(pattern, data) {
+		if(data['pattern'] != 'adapter') {
+			$("#errorModal").on('show.bs.modal', function(event) {
+				$("#errorModalBody").text("Incorrect JSON, please re-upload");
+				$("#errorModalTitle").text("JSON Error");
+			});
+			$("#errorModal").modal("toggle");
+			$("#errorModal #errorModalTitle").text("Error in entries");
+			return false;
+		}
+		
+		return true
+	},
+	
 	validate: function() {
 		$(".validName").each(function(index,el){
 			$(this).trigger("input");

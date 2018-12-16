@@ -3,7 +3,9 @@ $(document).ready(function() {
 	UploadIterator.receivedText = UploadIterator.receivedText.bind(UploadIterator)
 	UploadIterator.receivedText = function() {
 		var data = (JSON.parse(self.fr.result));
-		
+		if(!Upload.validateJSON("iterator", data)) {
+			return;
+		}
 		console.log(data);
 		
 		jQuery("#stateNameWrapper > div > div:nth-child(5) > div:nth-child(2) > div > input").val(data.container_name)

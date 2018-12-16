@@ -2,15 +2,11 @@ $(document).ready(function() {
 	UploadAdapter.receivedText = UploadAdapter.receivedText.bind(UploadAdapter)
 	UploadAdapter.receivedText = function() {
 		var data = (JSON.parse(self.fr.result));
-		if(data['pattern'] != 'adapter') {
-			$("#errorModal").on('show.bs.modal', function(event) {
-				$("#errorModalBody").text("Incorrect JSON, please re-upload");
-				$("#errorModalTitle").text("JSON Error");
-			});
-			$("#errorModal").modal("toggle");
-			$("#errorModal #errorModalTitle").text("Error in entries");
+		
+		if(!Upload.validateJSON("adapter", data)) {
 			return;
 		}
+		
 		console.log(data);
 		
 		// #targetFuncDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(2) > input.form-control.validName.paramType

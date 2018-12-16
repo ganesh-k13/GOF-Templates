@@ -3,13 +3,7 @@ $(document).ready(function() {
 	UploadPolicy.receivedText = UploadPolicy.receivedText.bind(UploadPolicy)
 	UploadPolicy.receivedText = function() {
 		var data = (JSON.parse(self.fr.result));
-		if(data['pattern'] != 'policy') {
-			$("#errorModal").on('show.bs.modal', function(event) {
-				$("#errorModalBody").text("Incorrect JSON, please re-upload");
-				$("#errorModalTitle").text("JSON Error");
-			});
-			$("#errorModal").modal("toggle");
-			$("#errorModal #errorModalTitle").text("Error in entries");
+		if(!Upload.validateJSON("policy", data)) {
 			return;
 		}
 		console.log(data);

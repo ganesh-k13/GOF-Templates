@@ -4,13 +4,7 @@ $(document).ready(function() {
 	UploadState.receivedText = UploadState.receivedText.bind(UploadState)
 	UploadState.receivedText = function() {
 		var data = (JSON.parse(self.fr.result));
-		if(data['pattern'] != 'state') {
-			$("#errorModal").on('show.bs.modal', function(event) {
-				$("#errorModalBody").text("Incorrect JSON, please re-upload");
-				$("#errorModalTitle").text("JSON Error");
-			});
-			$("#errorModal").modal("toggle");
-			$("#errorModal #errorModalTitle").text("Error in entries");
+		if(!Upload.validateJSON("state", data)) {
 			return;
 		}
 		console.log(data);
