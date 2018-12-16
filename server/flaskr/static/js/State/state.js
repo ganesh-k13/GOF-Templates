@@ -1,5 +1,9 @@
 $(document).ready(function() {
-
+	// console.log(UploadState.handleFileSelect);
+	// Button events initialize
+	UploadState.handleFileSelect = UploadState.handleFileSelect.bind(UploadState)
+	$("#fileinput").change(UploadState.handleFileSelect);
+	
     // START: Add a state functionality.
     $("#stateListColDiv").on("click", ".addStateBtn", function(event) {
         console.log("add clicked",$(this));

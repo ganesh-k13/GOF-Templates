@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-
+{% block customJS %}
+    <script src="{{ url_for('static',filename='./js/State/state.js') }}"></script>
+{% endblock %}
 {% block customCSS %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='./css/state.css') }}">
 {% endblock %}
@@ -121,7 +123,3 @@
 
 {% endblock %}
 
-
-{% block customJS %}
-    <script src="{{ url_for('static',filename='./js/State/state.js') }}"></script>
-{% endblock %}

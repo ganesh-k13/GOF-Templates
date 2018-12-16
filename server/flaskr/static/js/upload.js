@@ -26,8 +26,9 @@ var Upload = {
 			var file = input.files[0];
 			self = this;
 			self.fr = new FileReader();
-			self.fr.onload = this.receivedText;
+			self.fr.onload = self.receivedText;
 			self.fr.readAsText(file);
+			// console.log(this)
 			// fr.readAsDataURL(file);
 		}
 	},
@@ -41,4 +42,5 @@ var Upload = {
 var UploadState = Object.create(Upload);
 UploadState.receivedText = function() {
 	console.log(JSON.parse(self.fr.result));
+	// console.log("in");
 }
