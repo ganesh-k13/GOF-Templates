@@ -14,6 +14,8 @@ $(document).ready(function() {
 		});
 		
 		jQuery("#funcDeclDivRow > div > div > div > div > div:last-child > div > button.btn.btn-outline-secondary.delParameterBtn").first().trigger("click");
+		
+		jQuery(".entireStateWrapper.validName").trigger("input")
 	}
 
 	UploadIterator.handleFileSelect = UploadIterator.handleFileSelect.bind(UploadIterator)
