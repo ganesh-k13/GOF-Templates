@@ -55,7 +55,7 @@
         </div>
     </div>
     
-    <div class="container-fluid">
+    <div class="container-fluid" id="search-box">
         <div class="row" id="patternSearchBoxWrapper">
             <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11" id="patternSearchBoxDiv">
                 <input class="form form-control" id="patternSearchBox" type="text" name="patternSearchBox" placeholder="Search a Pattern">
@@ -68,11 +68,11 @@
         
         <div class="row">
             
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="state">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="abstractFactory">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                    <a href = {{ url_for("state") }}>
-                        <div id="statePatternDiv">
-                                State Pattern
+                    <a href = {{ url_for("abstractFactory") }}>
+                        <div id="abstractFactoryPatternDiv">
+                            Abstract Factory Pattern
                         </div>
                     </a>
                 </div>
@@ -82,12 +82,70 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
                     <a href = {{ url_for("adapter") }}>
                         <div id="adapterPatternDiv">
-                                Adapter Pattern
+                            Adapter Pattern
                         </div>
                     </a>
                 </div>
             </div>
         
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="bridge">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("bridge") }}>
+                        <div id="bridgePatternDiv">
+                                Bridge Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="builder">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("builder") }}>
+                        <div id="builderPatternDiv">
+                                Builder Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="chainOfResponsibility">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("chainOfResponsibility") }}>
+                        <div id="chainOfResponsibilityPatternDiv">
+                                Chain of Responsibility Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="command">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("command") }}>
+                        <div id="commandPatternDiv">
+                                Command Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="composite">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("composite") }}>
+                        <div id="compositePatternDiv">
+                                Composite Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="decorator">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
                     <a href = {{ url_for("decorator") }}>
@@ -98,10 +156,54 @@
                 </div>
             </div>
         
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="facade">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("facade") }}>
+                        <div id="facadePatternDiv">
+                                Facade Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
         </div>
-        
+
         <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="factory">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("factory") }}>
+                        <div id="factoryPatternDiv">
+                                Factory Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="flyweight">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("flyweight") }}>
+                        <div id="flyweightPatternDiv">
+                                Flyweight Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
         
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="interpreter">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("interpreter") }}>
+                        <div id="interpreterPatternDiv">
+                                Interpreter Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="row">
+            
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="iterator">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
                     <a href = {{ url_for("iterator") }}>
@@ -111,7 +213,7 @@
                     </a>
                 </div>
             </div>
-        
+            
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="mediator">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
                     <a href = {{ url_for("mediator") }}>
@@ -122,20 +224,30 @@
                 </div>
             </div>
         
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="singleton">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="memento">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
-                    <a href = {{ url_for("singleton") }}>
-                        <div id="singletonPatternDiv">
-                                Singleton Pattern
+                    <a href = {{ url_for("memento") }}>
+                        <div id="mementoPatternDiv">
+                                Memento Pattern
                         </div>
                     </a>
                 </div>
             </div>
         
         </div>
-        
+
         <div class="row">
-        
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="observer">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("observer") }}>
+                        <div id="observerPatternDiv">
+                                Observer Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="policy">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
                     <a href = {{ url_for("policy") }}>
@@ -146,21 +258,90 @@
                 </div>
             </div>
         
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="prototype">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("prototype") }}>
+                        <div id="prototypePatternDiv">
+                                Prototype Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
         </div>
-    
+
+        <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="proxy">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("proxy") }}>
+                        <div id="proxyPatternDiv">
+                                Proxy Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="singleton">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("singleton") }}>
+                        <div id="singletonPatternDiv">
+                                Singleton Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="state">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("state") }}>
+                        <div id="statePatternDiv">
+                                State Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="row">
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="templateMethod">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("templateMethod") }}>
+                        <div id="templateMethodPatternDiv">
+                                Template Method Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 patternDivCol" name="visitor">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 patternDivInfo">
+                    <a href = {{ url_for("visitor") }}>
+                        <div id="visitorPatternDiv">
+                                Visitor Pattern
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         var search_bar = document.getElementById("search-box");
-
-        if ($(document).height() > $(window).height()) { 
-            search_bar.style.display = 'visible';
-        } else {
-            search_bar.style.display = 'none';
-        }
-    </script> -->
+        $(window).on('resize', function(){
+            if ($(document).height() > $(window).height()) { 
+                search_bar.style.display = 'block';
+            } else {
+                search_bar.style.display = 'none';
+            }
+        });
+    </script>
 
 {% endblock %}
 
