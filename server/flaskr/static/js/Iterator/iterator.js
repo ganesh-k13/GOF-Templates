@@ -1,5 +1,8 @@
 $(document).ready(function() {
-
+	
+	UploadIterator.handleFileSelect = UploadState.handleFileSelect.bind(UploadState)
+	$("#fileinput").change(UploadIterator.handleFileSelect);
+	
     // START: Add a paramter functionality.
     $("#funcDeclWrapperRow").on('click', '.addParameterBtn', function(event) {
         console.log("addParameterTypeBtn");
