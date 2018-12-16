@@ -41,6 +41,15 @@ var Upload = {
 
 var UploadState = Object.create(Upload);
 UploadState.receivedText = function() {
-	console.log(JSON.parse(self.fr.result));
+	var data = (JSON.parse(self.fr.result));
+	console.log(data)
+	data['states'].forEach(function(state, i) {
+		jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > div > button.btn.btn-outline-secondary.addStateBtn").first().trigger("click")
+		
+		console.log(state.name)
+	})
+	// Remove Extra
+	jQuery("#stateListColDiv > div:nth-child(2) > div > button.btn.btn-outline-secondary.delStateBtn").first().trigger("click")
+	
 	// console.log("in");
 }
