@@ -295,12 +295,13 @@
 
     <script type="text/javascript">
         var search_bar = document.getElementById("search-box");
-
-        if ($(document).height() > $(window).height()) { 
-            search_bar.style.display = 'visible';
-        } else {
-            search_bar.style.display = 'none';
-        }
+        $(window).on('resize', function(){
+            if ($(document).height() > $(window).height()) { 
+                search_bar.style.display = 'block';
+            } else {
+                search_bar.style.display = 'none';
+            }
+        });
     </script>
 
 {% endblock %}
