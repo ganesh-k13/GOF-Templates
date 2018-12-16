@@ -42,6 +42,7 @@ $(document).ready(function() {
 		});	
 		
 		jQuery("#funcDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").first().trigger("click")
+
 		Upload.validate();
 	}
 	UploadState.handleFileSelect = UploadState.handleFileSelect.bind(UploadState)
