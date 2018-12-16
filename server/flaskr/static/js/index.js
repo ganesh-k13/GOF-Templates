@@ -14,13 +14,29 @@ $(document).ready(function() {
 
 
     var patternArr = [
-        "state",
+        "abstract factory",
         "adapter",
+        "bridge",
+        "builder",
+        "chain of responsibility",
+        "command",
+        "composite",
         "decorator",
+        "facade",
+        "factory",
+        "flyweight",
+        "interpreter",
         "iterator",
         "mediator",
+        "memento",
+        "observer",
+        "policy",
+        "prototype",
+        "proxy",
         "singleton",
-        "policy"
+        "state",
+        "template method",
+        "visitor"
     ];
     var trie = SuffixTree.fromArray(patternArr);
     var allPatternEles = $(".patternDivCol");
