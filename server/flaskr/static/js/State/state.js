@@ -1,7 +1,49 @@
 $(document).ready(function() {
+	// console.log(UploadState.handleFileSelect);
+	// Button events initialize
+	UploadState.receivedText = UploadState.receivedText.bind(UploadState)
+	UploadState.receivedText = function() {
+		var data = (JSON.parse(self.fr.result));
+		if(!Upload.validateJSON("state", data)) {
+			return;
+		}
+		console.log(data);
+		
+		// For States
+		data['states'].forEach(function(state, i) {
+			jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > div > button.btn.btn-outline-secondary.addStateBtn").first().trigger("click");
+			jQuery("#stateListColDiv > div:nth-child("+(i+1)+") > input").val(state.name);
+			console.log(state.name);
+		});
+		// Remove Extra
+		jQuery("#stateListColDiv > div:last-child > div > button.btn.btn-outline-secondary.delStateBtn").first().trigger("click");
+		
+		data['functions'].forEach(function(functions, i) {
+			jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(4) > div > div > button.btn.btn-secondary.addFuncDeclBtn").first().trigger("click")
+			jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(1) > input").val(functions.name)
+			jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div:nth-child(2) > input").val(functions.return)
+			
+			functions.param_types.forEach(function(param_type, j) {
+				jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > div > button.btn.btn-outline-secondary.addParameterBtn").first().trigger("click")
+				jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramType").val(param_type)
+				console.log(param_type)
+			});
+			jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:last-child > div > button.btn.btn-outline-secondary.delParameterBtn").first().trigger("click")
+			
+			functions.param_names.forEach(function(param_name, j) {
+				jQuery("#funcDeclDivRow > div:nth-child("+(i+1)+") > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child("+(j+1)+") > input.form-control.validName.paramName").val(param_name)
+			});
+		});	
+		
+		jQuery("#funcDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").first().trigger("click")
 
+		Upload.validate();
+	}
+	UploadState.handleFileSelect = UploadState.handleFileSelect.bind(UploadState)
+	$("#fileinput").change(UploadState.handleFileSelect);
+	
     // START: Add a state functionality.
-    $("#stateListColDiv").on("click", ".addStateBtn", function(event) {
+    $("#stateListColDiv").off('click').on("click", ".addStateBtn", function(event) {
         console.log("add clicked",$(this));
         $("#stateListColDiv").append("\
             <div class='input-group repeatableStateListGroup'>\

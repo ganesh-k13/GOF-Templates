@@ -1,5 +1,29 @@
 $(document).ready(function() {
+	
+	UploadIterator.receivedText = UploadIterator.receivedText.bind(UploadIterator)
+	UploadIterator.receivedText = function() {
+		var data = (JSON.parse(self.fr.result));
+		if(!Upload.validateJSON("iterator", data)) {
+			return;
+		}
+		console.log(data);
+		
+		jQuery("#stateNameWrapper > div > div:nth-child(5) > div:nth-child(2) > div > input").val(data.container_name)
+		jQuery("#customContent > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(5) > div:nth-child(2) > div > input").val(data.iterator_name)
+		
+		data.supported_types.forEach(function(type, i) {
+			jQuery("#funcDeclDivRow > div > div > div > div > div:nth-child("+(i+1)+") > div > button.btn.btn-outline-secondary.addParameterBtn").first().trigger("click");
+			jQuery("#funcDeclDivRow > div > div > div > div > div:nth-child("+(i+1)+") > input").val(type)
+		});
+		
+		jQuery("#funcDeclDivRow > div > div > div > div > div:last-child > div > button.btn.btn-outline-secondary.delParameterBtn").first().trigger("click");
+		
+		Upload.validate();
+	}
 
+	UploadIterator.handleFileSelect = UploadIterator.handleFileSelect.bind(UploadIterator)
+	$("#fileinput").change(UploadIterator.handleFileSelect);
+	
     // START: Add a paramter functionality.
     $("#funcDeclWrapperRow").on('click', '.addParameterBtn', function(event) {
         console.log("addParameterTypeBtn");
