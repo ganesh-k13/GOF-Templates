@@ -1,7 +1,7 @@
 var Upload = {
     
 	validateJSON: function(pattern, data) {
-		if(data['pattern'] != 'adapter') {
+		if(data['pattern'] != pattern) {
 			$("#errorModal").on('show.bs.modal', function(event) {
 				$("#errorModalBody").text("Incorrect JSON, please re-upload");
 				$("#errorModalTitle").text("JSON Error");
