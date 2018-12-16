@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                         
-                        <a href="#" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">
+                        <a href="{{ url_for('home') }}" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">
                             GOF Templates
                         </a>
                         
@@ -53,13 +53,8 @@
                         </div>
                     </div>
                 </nav>
+
                 <!-- START EDITING FROM HERE -->
-                {% for message in get_flashed_messages() %}
-                <div class="alert alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{message}}
-                </div>
-                {% endfor %}
                 <div id="patternHeading">
                     {{ title }} Pattern
                 </div>
@@ -74,14 +69,15 @@
                       <div class="container-fluid" id="footerDiv">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-2 col-xs-2">
-                                <i class="far fa-copyright" link=""></i> Copyright GOF Template 2019.
+                                <a href="https://creativecommons.org/licenses/by-sa/4.0">
+                                    <i class="far fa-copyright"></i> Copyright GOF Template 2019.
+                                </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-5 col-sm-6 col-xs-5">
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-5">
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-facebook"></i></a>
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="float-right footerSocialIcons"><i class="fab fa-reddit"></i></a>
+                                <a href="https://www.youtube.com/user/PewDiePie" class="float-right footerSocialIcons"><i class="fab fa-youtube"></i></a>
+                                <a href="https://github.com/ganesh-k13/GOF-Templates" class="float-right footerSocialIcons"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                       </div>
