@@ -42,14 +42,4 @@ var Upload = {
 // #funcDeclDivRow > div:nth-child(1) > div > div > div.col-xl-6.col-lg-6.col-md-6.col-6.paramDiv > div:nth-child(1) > input.form-control.validName.paramName
 
 var UploadState = Object.create(Upload);
-
-
 var UploadIterator = Object.create(Upload);
-
-UploadIterator.receivedText = function() {
-	var data = (JSON.parse(self.fr.result));
-	console.log(data);
-	
-	jQuery("#stateNameWrapper > div > div:nth-child(5) > div:nth-child(2) > div > input").val(data.container_name)
-	jQuery("#customContent > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(5) > div:nth-child(2) > div > input").val(data.iterator_name)
-}
