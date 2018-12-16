@@ -4,6 +4,15 @@ $(document).ready(function() {
 	UploadState.receivedText = UploadState.receivedText.bind(UploadState)
 	UploadState.receivedText = function() {
 		var data = (JSON.parse(self.fr.result));
+		if(data['pattern'] != 'state') {
+			$("#errorModal").on('show.bs.modal', function(event) {
+				$("#errorModalBody").text("Incorrect JSON, please re-upload");
+				$("#errorModalTitle").text("JSON Error");
+			});
+			$("#errorModal").modal("toggle");
+			$("#errorModal #errorModalTitle").text("Error in entries");
+			return;
+		}
 		console.log(data);
 		
 		// For States
@@ -33,7 +42,7 @@ $(document).ready(function() {
 		});	
 		
 		jQuery("#funcDeclDivRow > div:last-child > div > div > div:nth-child(4) > div > div > button.btn.btn-danger.delFuncDeclBtn").first().trigger("click")
-		
+		Upload.validate();
 	}
 	UploadState.handleFileSelect = UploadState.handleFileSelect.bind(UploadState)
 	$("#fileinput").change(UploadState.handleFileSelect);

@@ -1,5 +1,11 @@
 var Upload = {
     
+	validate: function() {
+		$(".validName").each(function(index,el){
+			$(this).trigger("input");
+		});
+	},
+	
 	init : function() {
 		if (this.constructor === Upload) {
 		  throw new Error("Can't instantiate abstract class!");
