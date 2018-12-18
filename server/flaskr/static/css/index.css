@@ -154,9 +154,23 @@ footer a:focus {
     font-size: 20px;
 }
 
+.textColor{
+    color: #FFFFFF;
+}
+
+.textColor:hover{
+    color: #FFFFFF;
+}
+
+.greenColorDiv{
+    background-color: #218838!important;
+}
+
 .patternDivInfo
 {
-    background-color: #FFFFFF;
+    cursor: pointer;
+    background-color: #C82333;
+    color: #FFFFFF;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -164,7 +178,7 @@ footer a:focus {
 .patternDivCol{
     /*border: 1px solid black;*/
     margin-top: 10px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .patternDivInfo a:-webkit-any-link{
