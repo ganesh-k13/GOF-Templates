@@ -242,7 +242,9 @@ footer a:focus {
 	opacity: 0;
 	right: 0;
 	top: 0;
+    cursor: pointer;
 }
+
 
 /*
     End - Writing your custom CSS here, or make your own CSS file.
