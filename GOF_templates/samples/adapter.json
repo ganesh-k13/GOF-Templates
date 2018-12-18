@@ -1,0 +1,54 @@
+{
+    "pattern": "adapter",
+    "target_functions": [
+        {
+            "name": "f11",
+            "param_types": [
+                "int",
+                "float"
+            ],
+            "param_names": [
+                "i1",
+                "f1"
+            ],
+            "return": "int"
+        },
+        {
+            "name": "f12",
+            "param_types": [
+                "double"
+            ],
+            "param_names": [
+                "d2"
+            ],
+            "return": "float"
+        }
+    ],
+    "adaptee_functions": [
+        {
+            "name": "f21",
+            "param_types": [
+                "float",
+                "double"
+            ],
+            "param_names": [
+                "f1",
+                "d1"
+            ],
+            "return": "float"
+        },
+        {
+            "name": "f22",
+            "param_types": [
+                "int",
+                "float"
+            ],
+            "param_names": [
+                "i2",
+                "f2"
+            ],
+            "return": "double"
+        }
+    ],
+    "num_functions": 2
+}

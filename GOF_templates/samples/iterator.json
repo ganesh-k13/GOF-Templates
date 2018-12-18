@@ -1,0 +1,9 @@
+{
+    "pattern": "iterator",
+    "container_name": "c1",
+    "iterator_name": "i1",
+    "supported_types": [
+        "int",
+        "float"
+    ]
+}

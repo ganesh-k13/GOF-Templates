@@ -1,0 +1,40 @@
+{
+    "pattern": "policy",
+    "policies": [
+        {
+            "name": "p1"
+        },
+        {
+            "name": "p2"
+        },
+        {
+            "name": "p3"
+        }
+    ],
+    "functions": [
+        {
+            "name": "int",
+            "param_types": [
+                "int",
+                "float"
+            ],
+            "param_names": [
+                "p1",
+                "p2"
+            ],
+            "return": "f1"
+        },
+        {
+            "name": "float",
+            "param_types": [
+                "double",
+                "float"
+            ],
+            "param_names": [
+                "d1",
+                "f1"
+            ],
+            "return": "f2"
+        }
+    ]
+}

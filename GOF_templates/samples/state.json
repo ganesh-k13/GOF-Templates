@@ -1,0 +1,42 @@
+{
+    "pattern": "state",
+    "states": [
+        {
+            "name": "s1"
+        },
+        {
+            "name": "s2"
+        },
+        {
+            "name": "s3"
+        }
+    ],
+    "functions": [
+        {
+            "name": "int",
+            "param_types": [
+                "int",
+                "double"
+            ],
+            "param_names": [
+                "i1",
+                "d1"
+            ],
+            "return": "foo1"
+        },
+        {
+            "name": "float",
+            "param_types": [
+                "double",
+                "int",
+                "float"
+            ],
+            "param_names": [
+                "d2",
+                "i2",
+                "f2"
+            ],
+            "return": "foo2"
+        }
+    ]
+}
