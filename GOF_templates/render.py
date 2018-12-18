@@ -213,4 +213,4 @@ class Iterator(Pattern):
 			template = Template(f.read())
 		
 		with open(self.dirname + '/templates/output/iterator/test.cpp', 'w') as f:
-			f.write(template.render(container_name=self.meta['container_name']))
+			f.write(template.render(container_name=self.meta['container_name'], supported_types=self.meta['supported_types']))
