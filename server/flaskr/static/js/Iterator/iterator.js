@@ -239,7 +239,16 @@ $(document).ready(function() {
 
     $(".entireStateWrapper").on("input",".validName", function(event) {
         // data-toggle="tooltip" data-placement="left" title="Tooltip on top"
-        var res = matchExact(/[A-Za-z_]+[A-Za-z0-9_]*/g,$(this).val()); //basically it's a valid variable in a language like C++
+
+        var res;
+        
+        res = matchExact(/[A-Za-z_]+[A-Za-z0-9_]*/g,$(this).val()); //basically it's a valid variable in a language like C++
+        
+        if($(this).hasClass("retTypeName") || $(this).hasClass("paramType"))
+        {
+            res = matchExact(/([A-Za-z_]+[A-Za-z0-9_]*)[\&\*]*/g,$(this).val()); //basically it's a valid variable in a language like C++
+        }
+
         if(res==false){
             console.log("here");
             $(this).attr("isValidInput",false);
