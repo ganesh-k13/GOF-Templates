@@ -1,4 +1,7 @@
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 #ifndef STATE_H
 #define STATE_H
